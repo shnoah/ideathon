@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150803154126) do
+ActiveRecord::Schema.define(version: 20150804034451) do
 
   create_table "article_images", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -20,13 +20,16 @@ ActiveRecord::Schema.define(version: 20150803154126) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "title"
+    t.string   "summary"
     t.text     "contents"
+    t.string   "my_image"
+    t.string   "contact_kakao"
+    t.string   "contact_email"
     t.string   "demo_link"
     t.string   "leader_name"
-    t.string   "member_name"
     t.string   "score"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "articles_tags", id: false, force: :cascade do |t|
@@ -34,6 +37,13 @@ ActiveRecord::Schema.define(version: 20150803154126) do
     t.integer  "tag_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "members", force: :cascade do |t|
+    t.integer  "article_id"
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "replies", force: :cascade do |t|
@@ -44,7 +54,7 @@ ActiveRecord::Schema.define(version: 20150803154126) do
   end
 
   create_table "tags", force: :cascade do |t|
-    t.string   "name"
+    t.string   "tagging"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

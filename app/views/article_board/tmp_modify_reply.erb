@@ -1,11 +1,13 @@
+<!-- 수정완료 -->
+
 <div class="row">
     <div class="col-md-2"></div>
     <div class="col-md-8">
-        <form action="/kanu/update_reply/<%=@this_post.id%>" method="POST">
+        <form action="/article_board/tmp_update_reply/<%=@this_post.id%>" method="POST">
             <div class="row">    
                 <div class="col-md-2"></div>
                 <div class="col-md-6">
-                    <input type="text" class="form-control" name="new_reply" value="<%=@this_post.content%>">
+                    <input type="text" class="form-control" name="new_reply" value="<%=@this_post.contents%>">
                     <span class="help-block">128자까지 가능합니다.</span>
                     </div>
                 <div class="col-md-2">

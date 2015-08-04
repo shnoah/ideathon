@@ -1,0 +1,64 @@
+<!-- 수정완료 -->
+
+<div class="container">
+      <div class="jumbotron">
+<!-- 본문 -->   
+        <h1><%= @this_post.title %></h1>
+        <p></p>
+        <div class="alert alert-dismissible alert-info">
+<!-- 한줄 설명 --> 
+            <%= @this_post.summary %>
+        </div>
+<!-- 상세 설명 -->         
+        <p><%= @this_post.contents %></p>
+<!-- 이미지 -->         
+        <p><center><img class="img-responsive" src="<%= @this_post.my_image.url %>"></center></p>
+<!-- demo link -->
+        <p><center><a href="http://<%= @this_post.demo_link %>" target="_blank">Demo link</a></center></p>
+<!-- 리더 -->
+        <p align="left">팀 리더 : <%= @this_post.leader_name%></p>
+<!-- 연락처 -->
+        <p align="left">카카오ID : <%= @this_post.contact_kakao%></p>
+        <p align="left">E-MAIL : <%= @this_post.contact_email%></p>
+<!-- 태그 -->
+
+<!-- 포스팅 시간 -->  
+        <p align="right">최종 수정 : <%= @this_post.updated_at.in_time_zone("Seoul")%><p>
+     
+<!-- 댓글 입력 -->      
+        <form action = "/article_board/tmp_write_reply/" method="POST">
+            <input type = "hidden" name = "article_id" value = "<%=@this_post.id%>">
+            <div class="col-md-11"><input class="form-control"  type = "text" name="myreply"></div>
+            <div class="col-md-1"><input class="btn btn-success" type = "submit" value = "Reply"></div>
+        </form>
+      </div>
+      
+<!-- 댓글 출력 --> 
+        <% @this_post.replies.each do |r| %>
+            <div class="well well-sm">
+                <h4>Name(미구현)</h4>
+                <p><%= r.contents %></p>
+                <a href= "/article_board/tmp_modify_reply/<%=r.id%>" class="btn btn-primary active" role="button">수정</a>
+                <a href = "/article_board/tmp_delete_reply/<%= r.id %>" class="btn btn-primary active" role="button">삭제</a>
+            </div>
+        <% end %>
+</div>
+
+<br>
+
+<!-- Buttons --> 
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <center>
+            <a href= "/article_board/tmp_modify/<%= @this_post.id%>" class="btn btn-primary active" role="button">수정</a>
+            <a href = "/article_board/tmp_delete/<%= @this_post.id%>" class="btn btn-primary active" role="button">삭제</a>
+            <a href="/" class="btn btn-primary active" role="button">목록보기</a>
+        </center>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+
+ 
+

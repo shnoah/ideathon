@@ -2,52 +2,49 @@ class ArticleBoardController < ApplicationController
     
     def main_board
         
-        @tag = Tag.all
+        @tags = Tag.all
+        @articles = Article.all
         
     end
     
-    
-    
-    
-######################################################
+
+################################################################################
 
 #노승호, 이종진 작업 부분 - 노타치
 
-##########################################################
+################################################################################
 
-    def mainpage
-         @posts = Post.all 
+    def tmp_mainpage
+         @posts = Article.all 
     end
     
-    def write    
+    def tmp_write    
     end
     
-    def write_process
-        post = Post.new
+    def tmp_write_process
+        post = Article.new
 
-        post.post_name= params[:a_name] 
-        post.post_pwd =  params[:password]
-
-        post.post_title =params[:title]
-        post.post_short_content = params[:short_title]
-        post.post_content = params[:content]
+        post.title =params[:title]
+        post.summary = params[:summary]
+        post.contents = params[:contents]
+        post.demo_link = params[:demo_link]
         post.my_image = params[:image_file]
-        post.post_contact = params[:contact]
-        post.post_tag = params[:tag]
+        post.contact_kakao = params[:contact_kakao]
+        post.contact_email = params[:contact_email]
         
         post.save          
         redirect_to '/'
     end
     
 #수정 페이지로    
-    def modify
-        @this_post = Post.find(params[:id])  
+    def tmp_modify
+        @this_post = Article.find(params[:id])  
     end
 
 
 #본문 수정    
-    def update      
-        @this_post = Post.find(params[:id]) #수정할 데이터를 뽑는다.
+    def tmp_update      
+        @this_post = Article.find(params[:id]) #수정할 데이터를 뽑는다.
         
         @this_post.post_title =params[:title]
         @this_post.post_short_content = params[:short_title]
@@ -60,42 +57,40 @@ class ArticleBoardController < ApplicationController
         redirect_to action: "detailpage", id: @this_post.id
     end
         
-    def delete
-       @this_post = Post.find(params[:id])  
+    def tmp_delete
+       @this_post = Article.find(params[:id])  
     end
     
 #리플 수정
-    def update_reply
-
-        @this_post = Reply.find(params[:id]) #수정할 데이터를 뽑는다.
-        @this_post.content = params[:new_reply] #새로운 데이터를 쓴다
+    def tmp_update_reply
+        @this_post = Article.find(params[:id]) #수정할 데이터를 뽑는다.
+        @this_post.contents = params[:new_reply] #새로운 데이터를 쓴다
         
-        @this_page = @this_post.post_id
+        @this_page = @this_post.article_id
         
         @this_post.save # 저장 
   
-        redirect_to action: "detailpage", id: @this_page
+        redirect_to action: "tmp_detailpage", id: @this_page
     end
     
-        
-    
-    def write_reply
+    def tmp_write_reply
         @my_reply = Reply.new
-        @my_reply.post_id = params[:post_id]
-        @my_reply.content = params[:myreply]
+        @my_reply.article_id = params[:article_id]
+        @my_reply.contents = params[:myreply]
         @my_reply.save
         
         redirect_to :back       
     end
- 
-    def detailpage   
+    
+#상세페이지 
+    def tmp_detailpage   
         
-        @this_post = Post.find(params[:id]) 
-     #   @this_reply = Reply.find(params[:post_id])
+        @this_post = Article.find(params[:id]) 
         
     end
-  
-    def delete_reply    
+
+#리플삭제  
+    def tmp_delete_reply    
         
         @this_post = Reply.find(params[:id])
         
@@ -106,18 +101,16 @@ class ArticleBoardController < ApplicationController
         redirect_to action: "detailpage", id: @this_page
         
     end
-    
-    def modify_reply
-        
-        @this_post = Reply.find(params[:id])    
-    
+
+#리플수정    
+    def tmp_modify_reply
+        @this_post = Reply.find(params[:id])      
     end
 
-
 #글 삭제시 사용    
-     def pw_chk       
+    def tmp_pw_chk       
         @flag=0
-        @this_post = Post.find(params[:id])  
+        @this_post = Article.find(params[:id])  
         match = params[:new_pwd]
         
         if (@this_post.post_pwd==match)
@@ -129,10 +122,9 @@ class ArticleBoardController < ApplicationController
             @flag = 0      
         end          
     end
-    
+end    
 
-          
-        
+ 
 =begin        
         Model : DB
             C-Create : 별점 평가
@@ -144,8 +136,4 @@ class ArticleBoardController < ApplicationController
         저번시간 C,R 오늘은 D
 =end
 
-#####################################################################
-
-
-
-end
+################################################################################

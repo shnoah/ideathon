@@ -7,48 +7,84 @@
     <li role="presentation"><a href="#likes" aria-controls="likes" role="tab" data-toggle="tab">내 찜</a></li>
   </ul>
 
+
   <!-- Tab panes -->
   <div class="tab-content">
     <div role="tabpanel" class="tab-pane fade in active" id="random">
-    
     <br><br>
     
-    <%0.upto(5) do%>
+    <!--
+    <%# @tags.each do |item| %>
+      <%#= item.tagging %> : 
+      </br>
+    <%# end %>
+    
+    <%# @articles.each do |item| %>
+      <h1>제목: <%#= item.title %></h1></br>
+      <h2>요약: <%#= item.summary %></h2></br>
+      <h3>리더: <%#= item.leader_name %></h3>
+      <h3>
+        맴버: <%# item.members.each do |mem| %>
+          <%#= mem.name %>
+        <%# end %>
+      </h3>
+      태그:
+      <%# item.tags.each do |tag| %>
+        #<%#= tag.tagging%>[
+        <%# tag.articles.each do |zz| %>
+        <%#= zz.title %>,
+        <%# end %>
+        ] ,
+      <%# end %> 
+      </br></br>
+    <%# end %>
+    -->
+    
+      
+
+     
       <div class="row">
-      <%0.upto(3) do%>
+    <% @articles.each do |item| %>
         <div class="col-sm-6 col-md-3">
           <div class="thumbnail">
             <img src="http://imgnews.naver.net/image/277/2014/10/29/2014102910452844272_2_99_20141029110904.jpg?type=w540" />
             <div class="caption">
-              <h3>멋쟁이 사자처럼</h3>
-              <p>기술적 장벽때문에 본인의 생각을 세상 밖으로 표현하지 못하신 분들과 2013년 감동의 순간을 만들어 가고 싶습니다. 프로그래밍 경험 전혀 필요 없고, 심지어 컴맹이라도 상관없습니다. 기술적인 부분은 저희가 쌓아드립니다. 여러분이 집중 해야 할 일은 곧 세상에 태어날 여러분의 생각을 다듬는 일 입니다.</p>
+              <h3><%= item.title %></h3>
+              <p><%= item.summary %></p>
+              <div align="right">   <!--팀장명 오른쪽 정렬 처리-->
+               - <%= item.leader_name %>
+               </div>
               <hr>
-               - 멋사대학교 이두희
-              <hr>
-              #태그1 #태그2 #태그3
+              <% item.tags.each do |tag| %>
+                #<%= tag.tagging%>
+              <%end%>
             </div>
           </div>
         </div>
-      <%end%>
+        <%end%>
       </div>
-    <%end%>
-    
+
     </div>
  
  
+    <!-- Random tags -->
+
     <div role="tabpanel" class="tab-pane fade" id="tag">
       
       <br><br>
   
       <ol class="breadcrumb">
-        <% @tag.each do |a| %>
-        <li><a href="#">#<%=a.tag_id%></a></li>
+        <% @tags.each do |a| %>
+        <li><a href="#">#<%=a.tagging%></a></li>
         <%end%>
       </ol>
       
     </div>
-  
 
+  
+  
+  
+    <!-- My likes -->
     <div role="tabpanel" class="tab-pane fade" id="likes">
     <br><br>
     
@@ -71,5 +107,7 @@
       </div>
       <%end%>
     </div>
+    
+    
   </div>
 </div>

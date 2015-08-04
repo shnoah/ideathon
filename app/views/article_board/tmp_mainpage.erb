@@ -1,6 +1,6 @@
+<!-- 수정 완료 -->
+
 <center>
-
-
 <div style="height:200px">
     <h1><br><br>임시메인</h1>
             <% if user_signed_in? %>
@@ -10,33 +10,28 @@
          <a class="btn btn-success"  href="/users/sign_in">로그인</a></li>
          <a class="btn btn-success"  href="/users/sign_up">회원가입</a></li>
         <% end %>
-
 </div> 
 
 
 <table border=1 width=800 style="font-size:15pt">
     <tr>
         <td>#</td>
-        <td>작성자</td>
-        <td>제목</td>
      
+        <td>제목</td>     
     </tr>
 
+    <% @posts.each do |p| %>
+        <tr>    
+        <td><%=p.id%></td>
 
-<% @posts.each do |p| %>
-<tr>    
-    <td><%=p.id%></td>
-    <td><%=p.post_name%></td>
-    <td><strong><a href="/kanu/detailpage/<%=p.id%>"> <%= p.post_title%></strong></a></td>
-
-
-</tr>
-
-<%end%>
+            <td><strong><a href="/article_board/tmp_detailpage/<%=p.id%>"> <%= p.title%></strong></a></td>
+        </tr>
+    <%end%>
 </table>
 
 <div class="row">
- <a href="/kanu/write" class="btn btn-primary btn-lg active" role="button">등록</a>
+    <a href="/article_board/tmp_write" class="btn btn-primary btn-lg active" role="button">등록</a>
 </div>      
 </div>
+
 </center>
