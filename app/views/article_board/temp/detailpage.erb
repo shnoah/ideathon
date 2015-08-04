@@ -1,0 +1,80 @@
+  <div class="container">
+      <div class="jumbotron">
+<!-- 본문 -->   
+        <h1><%= @this_post.post_title %></h1>
+        <p></p>
+        <div class="alert alert-dismissible alert-info">
+<!-- 한줄 설명 --> 
+            <%= @this_post.post_short_content %>
+        </div>
+<!-- 상세 설명 -->         
+        <p><%= @this_post.post_content %></p>
+<!-- 이미지 -->         
+        <p><center><img class="img-responsive" src="<%= @this_post.my_image.url %>"></center></p>
+<!-- 연락처 -->
+        <p align="left">연락처 : <%= @this_post.post_contact %></p>
+<!-- 태그 -->
+        <p align="left"><strong><%= @this_post.post_tag %></strong></p>
+
+<!-- 포스팅 시간 -->  
+        <p align="right">최종 수정 : <%= @this_post.updated_at.in_time_zone("Seoul")%><p>
+     
+<!-- 댓글 입력 -->      
+        <form action = "/kanu/write_reply/" method="POST">
+            <input type = "hidden" name = "post_id" value = "<%=@this_post.id%>">
+            <div class="col-md-11"><input class="form-control"  type = "text" name="myreply"></div>
+            <div class="col-md-1"><input class="btn btn-success" type = "submit" value = "Reply"></div>
+        </form>
+      </div>
+      
+<!-- 댓글 출력 --> 
+        <% @this_post.replies.each do |r| %>
+            <div class="well well-sm">
+                <h4>Name(미구현)</h4>
+                <p><%= r.content %></p>
+                <a href= "/kanu/modify_reply/<%=r.id%>" class="btn btn-primary active" role="button">수정</a>
+                <a href = "/kanu/delete_reply/<%= r.id %>" class="btn btn-primary active" role="button">삭제</a>
+            </div>
+        <% end %>
+</div>
+
+<br>
+
+
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+<!-- Buttons --> 
+        <center>
+            <a href= "/kanu/modify/<%= @this_post.id%>" class="btn btn-primary active" role="button">수정</a>
+            <a href = "/kanu/delete/<%= @this_post.id%>" class="btn btn-primary active" role="button">삭제</a>
+            <a href="/" class="btn btn-primary active" role="button">목록보기</a>
+        </center>
+    </div>
+    <div class="col-md-4"></div>
+
+</div>
+
+
+ 
+
+
+
+
+<!-- 태그부분 따온거... 지우게 되겠지만 그냥 일단 주석처리-->
+<!--
+<fieldset>
+    <div class = "form-group">
+        <label for="tags">태그</label>
+        <div class = "select2-container select2-container-multi form-control s2Tagging" id="s2id_tags">
+            <ul class="select2-choices">  
+                <li class="select2-search-field">    
+                    <label for="s2id_autogen1" class="select2-offscreen">태그</label>    
+                    <input type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" class="select2-input" id="s2id_autogen1" maxlength="64" placeholder="" style="width: 20px;" aria-activedescendant="select2-result-label-70"> 
+                </li>
+            </ul>
+        </div>
+        <input class="form-control s2Tagging select2-offscreen" id="tags" name="tags" type="text" value="" tabindex="-1">
+    </div>
+</fieldset>
+-->

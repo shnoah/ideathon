@@ -1,0 +1,2 @@
+module ArticleBoardHelper
+end

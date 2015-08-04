@@ -1,0 +1,92 @@
+
+<!--
+<div class="row">
+
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <form action="/kanu/update/<%=@this_post.id%>" method="POST">
+            <div class="row">    
+                <div class="col-md-2"></div>
+                <div class="col-md-6">
+                
+                    <input type="text" class="form-control" name="new_content" required value="<%=@this_post.post_content %>">
+                    <span class="help-block">128자까지 가능합니다.</span>
+                    </div>
+                <div class="col-md-2">
+                    <input type="submit" class="btn btn-success" value="수정">
+                </div>
+                <div class="col-md-2"></div>
+            </div>   
+        </form>
+    </div>  
+    <div class="col-md-2"></div>
+</div>
+==========
+-->
+<div class="row">
+    <div class="col-lg-2"></div>
+    <div class="col-lg-8">
+      <form class="form-horizontal" action="/kanu/update/<%=@this_post.id%>" method="POST" enctype="multipart/form-data">
+          <fieldset>
+            <legend>수정페이지</legend>
+            
+
+            <div class="form-group">
+              <label class="col-lg-2 control-label">서비스명</label>
+              <div class="col-lg-10">
+                <input type="text" class="form-control"  name="title" value="<%=@this_post.post_title%>" required>
+              </div>
+            </div>
+            
+                  <div class="form-group">
+              <label class="col-lg-2 control-label">한줄 설명</label>
+              <div class="col-lg-10">
+                <input type="text" class="form-control"  name="short_title" value="<%=@this_post.post_short_content%>" required>
+              </div>
+            </div>
+            
+
+            
+            <div class="form-group">
+              <label for="textArea" class="col-lg-2 control-label">상세 설명</label>
+              <div class="col-lg-10">
+                <textarea class="form-control" rows="3"  name="content" required>
+                <%=@this_post.post_content%>
+                </textarea>
+             
+              </div>
+            </div>
+
+            
+          <div class="form-group">
+              <label class="col-lg-2 control-label">연락처</label>
+              <div class="col-lg-10">
+                
+                <input type="text" class="form-control"  name="contact"  value="<%=@this_post.post_contact%>"  required>
+                <span class="help-block">등록한 연락처로 팀빌딩과 관련한 연락을 주고받을 수 있습니다. </span>
+              </div>
+            </div>
+
+          <div class="form-group">
+              <label class="col-lg-2 control-label">태그</label>
+              <div class="col-lg-10">
+                <input type="text" class="form-control"  name="tag"  value="<%=@this_post.post_tag%>" required>
+                <span class="help-block">최대 3개의 태그를 등록할 수 있습니다. 태그는 아이디어 검색에  사용됩니다.</span>
+              </div>
+            </div>           
+        
+            <div class="form-group">
+              <div class="col-lg-10 col-lg-offset-2">
+                <a href="/kanu/detailpage/<%=@this_post.id%>" class="btn btn-default" role="button">돌아가기</a>
+                <button type="reset" class="btn btn-default">Reset</button>
+                <button type="submit" class="btn btn-primary">수정</button>
+              </div>
+            </div>
+          </fieldset>
+        </form>
+    </div>
+    <div class="col-lg-2"></div>
+</div>    
+ 
+
+

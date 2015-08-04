@@ -1,0 +1,75 @@
+<div>
+
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation" class="active"><a href="#random" aria-controls="random" role="tab" data-toggle="tab">랜덤</a></li>
+    <li role="presentation"><a href="#tag" aria-controls="tag" role="tab" data-toggle="tab">태그</a></li>
+    <li role="presentation"><a href="#likes" aria-controls="likes" role="tab" data-toggle="tab">내 찜</a></li>
+  </ul>
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane fade in active" id="random">
+    
+    <br><br>
+    
+    <%0.upto(5) do%>
+      <div class="row">
+      <%0.upto(3) do%>
+        <div class="col-sm-6 col-md-3">
+          <div class="thumbnail">
+            <img src="http://imgnews.naver.net/image/277/2014/10/29/2014102910452844272_2_99_20141029110904.jpg?type=w540" />
+            <div class="caption">
+              <h3>멋쟁이 사자처럼</h3>
+              <p>기술적 장벽때문에 본인의 생각을 세상 밖으로 표현하지 못하신 분들과 2013년 감동의 순간을 만들어 가고 싶습니다. 프로그래밍 경험 전혀 필요 없고, 심지어 컴맹이라도 상관없습니다. 기술적인 부분은 저희가 쌓아드립니다. 여러분이 집중 해야 할 일은 곧 세상에 태어날 여러분의 생각을 다듬는 일 입니다.</p>
+              <hr>
+               - 멋사대학교 이두희
+              <hr>
+              #태그1 #태그2 #태그3
+            </div>
+          </div>
+        </div>
+      <%end%>
+      </div>
+    <%end%>
+    
+    </div>
+ 
+ 
+    <div role="tabpanel" class="tab-pane fade" id="tag">
+      
+      <br><br>
+  
+      <ol class="breadcrumb">
+        <% @tag.each do |a| %>
+        <li><a href="#">#<%=a.tag_id%></a></li>
+        <%end%>
+      </ol>
+      
+    </div>
+  
+
+    <div role="tabpanel" class="tab-pane fade" id="likes">
+    <br><br>
+    
+    
+      <%0.upto(1) do%>
+      <div class="row">
+      <%0.upto(3) do%>
+        <div class="col-sm-6 col-md-3">
+          <div class="thumbnail">
+            <img src="https://icesummer.s3.amazonaws.com/uploads/image/image/10/Czt88Pj.jpg" />
+            <div class="caption">
+              <h3>멋쟁이 사자처럼</h3>
+              <p>기술적 장벽때문에 본인의 생각을 세상 밖으로 표현하지 못하신 분들과 2013년 감동의 순간을 만들어 가고 싶습니다. 프로그래밍 경험 전혀 필요 없고, 심지어 컴맹이라도 상관없습니다. 기술적인 부분은 저희가 쌓아드립니다. 여러분이 집중 해야 할 일은 곧 세상에 태어날 여러분의 생각을 다듬는 일 입니다.</p>
+              <hr>
+              #태그1 #태그2 #태그3
+            </div>
+          </div>
+        </div>
+      <%end%>
+      </div>
+      <%end%>
+    </div>
+  </div>
+</div>
