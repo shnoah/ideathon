@@ -1,54 +1,47 @@
+<!--박준성 작업-->
 <div class="container">
-  <!--박준성 형님 부분--->
-<div>
 
   <!-- Nav tabs -->
+  <!--Case1: 태그별로 모아보기 선택되어 있지 않은 경우(처음 접속시 등)-->
+  <%if params[:id].blank?%>
   <ul class="nav nav-tabs" role="tablist">
     <li role="presentation" class="active"><a href="#random" aria-controls="random" role="tab" data-toggle="tab">랜덤</a></li>
     <li role="presentation"><a href="#tag" aria-controls="tag" role="tab" data-toggle="tab">태그</a></li>
     <li role="presentation"><a href="#likes" aria-controls="likes" role="tab" data-toggle="tab">내 찜</a></li>
   </ul>
+  
+  <!--Case2: 태그별로 모아보는 경우-->  
+  <%else%>
+  <ul class="nav nav-tabs" role="tablist">
+    <li role="presentation"><a href="#random" aria-controls="random" role="tab" data-toggle="tab">랜덤</a></li>
+    <li role="presentation" class="active"><a href="#tag" aria-controls="tag" role="tab" data-toggle="tab">태그</a></li>
+    <li role="presentation"><a href="#likes" aria-controls="likes" role="tab" data-toggle="tab">내 찜</a></li>
+  </ul>
+  <%end%>
 
 
-  <!-- Tab panes -->
+  
   <div class="tab-content">
+  
+  <!-- RANDOM TAB -->
+  
+  <!--Case1: 랜덤 탭 active-->
+  <%if params[:id].blank?%>
     <div role="tabpanel" class="tab-pane fade in active" id="random">
-    
-    <!--
-    <%# @tags.each do |item| %>
-      <%#= item.tagging %> : 
-      </br>
-    <%# end %>
-    
-    <%# @articles.each do |item| %>
-      <h1>제목: <%#= item.title %></h1></br>
-      <h2>요약: <%#= item.summary %></h2></br>
-      <h3>리더: <%#= item.leader_name %></h3>
-      <h3>
-        맴버: <%# item.members.each do |mem| %>
-          <%#= mem.name %>
-        <%# end %>
-      </h3>
-      태그:
-      <%# item.tags.each do |tag| %>
-        #<%#= tag.tagging%>[
-        <%# tag.articles.each do |zz| %>
-        <%#= zz.title %>,
-        <%# end %>
-        ] ,
-      <%# end %> 
-      </br></br>
-    <%# end %>
-    -->
-    
+  
+  <!--Case2: 랜덤 탭 inactive-->
+  <%else%>
+    <div role="tabpanel" class="tab-pane fade" id="random">
+  <%end%>
+  
       <div class="page-header">
         <h1><small>등록되어 있는 아이디어를 랜덤으로 보여줍니다.</small></h1>
       </div>
 
-     
       <div class="row">
-    <% @articles.each do |item| %>
+        <% @articles.each do |item| %>
         <div class="col-sm-6 col-md-3">
+          <a href="/article_board/detailpage/<%=item.id%>">
           <div class="thumbnail" style="height:645px">
             <img src="http://porch.com/advice/wp-content/uploads/2014/06/headshot-dimensions.gif" />
             <div class="caption">
@@ -58,7 +51,7 @@
                - <%= item.leader_name %>
                </div>
               <hr>
-              <div style="vertical-align: bottom">
+              <div> <!--이 div가 .caption의 아래쪽 정렬 필요-->
                 <div align="center">
                   오늘의 <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp;30
                 </div><br>
@@ -68,37 +61,71 @@
               </div>
             </div>
           </div>
+          </a>
         </div>
         <%end%>
       </div>
-
     </div>
  
  
-    <!-- Random tags -->
-
+    <!-- TAG TAB -->
+    
+    <!--Case1: 태그 탭 inactive-->
+    <%if params[:id].blank?%>
     <div role="tabpanel" class="tab-pane fade" id="tag">
+    
+    <!--Case2: 태그 탭 active-->
+    <%else%>
+    <div role="tabpanel" class="tab-pane fade in active" id="tag">
+    <%end%>
+    
       <div class="page-header">
         <h1><small>태그를 클릭하면 해당 태그를 가지는 아이디어를 모아볼 수 있습니다.</small></h1>
       </div>
       <ol class="breadcrumb">
         <% @tags.each do |a| %>
-        
-        <li><a href="/article_board/tag/?id=<%=a.id%>">#<%=a.tagging%></a></li>
+        <li><a href="/article_board/main_board/?id=<%=a.id%>">#<%=a.tagging%></a></li>
         <%end%>
       </ol>
       
+      <!--Case1: 표시 없음-->
+      <%if params[:id].blank?%>
       
-  <div>
-    <%= render :partial => "article_board/tag" %>
-  </div>
-      
-      
-      
+      <!--Case2: 해당 태그 article 표시-->
+      <%else%>
+      <div>
+      <h2>
+      </div>
+      <div class="row"> <!-- 랜덤 탭과 동일 -->
+        <%@tag_params.articles.shuffle.each do |x|%>
+        <div class="col-sm-6 col-md-3">
+        <a href="/article_board/detailpage/<%=x.id%>">
+          <div class="thumbnail" style="height:645px">
+            <img src="http://porch.com/advice/wp-content/uploads/2014/06/headshot-dimensions.gif" />
+            <div class="caption">
+              <h3><%= x.title %></h3>
+              <p><%= x.summary %></p>
+              <div align="right">
+               - <%= x.leader_name %>
+               </div>
+              <hr>
+              <div style="vertical-align: bottom">
+                <div align="center">
+                  오늘의 <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp;30
+                </div><br>
+                  <% x.tags.each do |tag| %>
+                  #<%= tag.tagging%>
+                  <%end%>
+              </div>
+            </div>
+          </div>
+        </a>  
+        </div>
+         <%end%>
+      </div>
+      <%end%>
     </div>
 
-  
-  
   
     <!-- My likes -->
     <div role="tabpanel" class="tab-pane fade" id="likes">
@@ -107,8 +134,9 @@
       </div>
     
       <div class="row">
-    <% @articles.sample(3).each do |item| %>
+      <% @articles.each do |item| %>
         <div class="col-sm-6 col-md-3">
+        <a href="/article_board/detailpage/<%=item.id%>">
           <div class="thumbnail" style="height:645px">
             <img src="http://porch.com/advice/wp-content/uploads/2014/06/headshot-dimensions.gif" />
             <div class="caption">
@@ -128,16 +156,10 @@
               </div>
             </div>
           </div>
+        </a>
         </div>
         <%end%>
       </div>
-    
+    </div>
   </div>
 </div>
-  
-  
-  
-  
-
-</div>
-

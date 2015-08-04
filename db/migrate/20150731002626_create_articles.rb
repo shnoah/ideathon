@@ -11,6 +11,7 @@ class CreateArticles < ActiveRecord::Migration
       t.string :contact_email
       t.string :demo_link
       t.string :leader_name
+      t.string :member_name 
       t.string :score, defult: 0
 
       t.timestamps null: false

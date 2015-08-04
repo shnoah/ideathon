@@ -28,6 +28,7 @@ ActiveRecord::Schema.define(version: 20150804034451) do
     t.string   "contact_email"
     t.string   "demo_link"
     t.string   "leader_name"
+    t.string   "member_name"
     t.string   "score"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
@@ -49,10 +50,11 @@ ActiveRecord::Schema.define(version: 20150804034451) do
 
   create_table "replies", force: :cascade do |t|
     t.string   "writer"
+    t.string   "writer_email"
     t.integer  "article_id"
     t.string   "contents"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "tags", force: :cascade do |t|
