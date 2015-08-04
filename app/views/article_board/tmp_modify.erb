@@ -1,28 +1,5 @@
+<!-- 수정 완료 -->
 
-<!--
-<div class="row">
-
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
-        <form action="/kanu/update/<%=@this_post.id%>" method="POST">
-            <div class="row">    
-                <div class="col-md-2"></div>
-                <div class="col-md-6">
-                
-                    <input type="text" class="form-control" name="new_content" required value="<%=@this_post.post_content %>">
-                    <span class="help-block">128자까지 가능합니다.</span>
-                    </div>
-                <div class="col-md-2">
-                    <input type="submit" class="btn btn-success" value="수정">
-                </div>
-                <div class="col-md-2"></div>
-            </div>   
-        </form>
-    </div>  
-    <div class="col-md-2"></div>
-</div>
-==========
--->
 
 <div class="row">
     <div class="col-lg-2"></div>
@@ -39,48 +16,79 @@
               </div>
             </div>
             
-                  <div class="form-group">
+            <div class="form-group">
               <label class="col-lg-2 control-label">한줄 설명</label>
               <div class="col-lg-10">
-                <input type="text" class="form-control"  name="short_title" value="<%=@this_post.summary%>" required>
+                <input type="text" class="form-control"  name="summary" value="<%=@this_post.summary%>" required>
               </div>
             </div>
             
-
+            <div class="form-group">
+              <label class="col-lg-2 control-label">데모링크</label>
+              <div class="col-lg-10">
+                <input type="text" class="form-control"  name="demo_link" value="<%=@this_post.demo_link%>" required>
+              </div>
+            </div>
+            
             
             <div class="form-group">
               <label for="textArea" class="col-lg-2 control-label">상세 설명</label>
               <div class="col-lg-10">
-                <textarea class="form-control" rows="3"  name="content" required>
-                <%=@this_post.contents%>
-                </textarea>
+                <textarea class="form-control" rows="3"  name="contents" required><%=@this_post.contents%></textarea>
              
               </div>
             </div>
 
-            
           <div class="form-group">
-              <label class="col-lg-2 control-label">연락처</label>
+              <label class="col-lg-2 control-label">이미지 첨부</label>
+              <div class="col-lg-10">
+              <input type=file name="image_file">
+              <span class="help-block">캡처 이미지, 손으로 그린 그림 등 모두 가능합니다.</span>
+               </div>
+            </div>
+            
+          
+          <div class="form-group">
+              <label class="col-lg-2 control-label">팀 리더 이름</label>
               <div class="col-lg-10">
                 
-                <input type="text" class="form-control"  name="contact"  value="<%=@this_post.post_contact%>"  required>
-                <span class="help-block">등록한 연락처로 팀빌딩과 관련한 연락을 주고받을 수 있습니다. </span>
+                <input type="text" class="form-control"  name="leader_name" placeholder="리더이름을 입력해 (256Bytes)" required>
+                
+              </div>
+            </div>  
+            
+            
+            
+          <div class="form-group">
+              <label class="col-lg-2 control-label">카카오톡</label>
+              <div class="col-lg-10">
+                
+                <input type="text" class="form-control"  name="contact_kakao" value="<%=@this_post.contact_kakao%>" required>
+                <span class="help-block">등록한 연락처로 팀빌딩과 관련된 연락을 주고받을 수 있습니다. </span>
               </div>
             </div>
-
+            
+          <div class="form-group">
+              <label class="col-lg-2 control-label">E-mail</label>
+              <div class="col-lg-10">
+                
+                <input type="text" class="form-control"  name="contact_email"value="<%=@this_post.contact_email%>" required>
+                <span class="help-block">등록한 연락처로 팀빌딩과 관련된 연락을 주고받을 수 있습니다. </span>
+              </div>
+            </div>
+            
 <!--
           <div class="form-group">
               <label class="col-lg-2 control-label">태그</label>
               <div class="col-lg-10">
-                <input type="text" class="form-control"  name="tag"  value="<%=@this_post.post_tag%>" required>
+                <input type="text" class="form-control"  name="tag" placeholder="#맞팔#소통 금지 (미구현) (256Bytes)" required>
                 <span class="help-block">최대 3개의 태그를 등록할 수 있습니다. 태그는 아이디어 검색에  사용됩니다.</span>
               </div>
-            </div> 
--->
-        
+            </div>           
+-->        
             <div class="form-group">
               <div class="col-lg-10 col-lg-offset-2">
-                <a href="/kanu/detailpage/<%=@this_post.id%>" class="btn btn-default" role="button">돌아가기</a>
+                <a href="/article_board/tmp_detailpage/<%=@this_post.id%>" class="btn btn-default" role="button">돌아가기</a>
                 <button type="reset" class="btn btn-default">Reset</button>
                 <button type="submit" class="btn btn-primary">수정</button>
               </div>
@@ -89,7 +97,4 @@
         </form>
     </div>
     <div class="col-lg-2"></div>
-</div>    
- 
-
-
+</div>    ㅁ

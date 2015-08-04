@@ -38,7 +38,7 @@
             <div class="well well-sm">
                 <h4>Name(미구현)</h4>
                 <p><%= r.contents %></p>
-                <a href= "/article_board/tmp_modify_reply/<%=r.id%>" class="btn btn-primary active" role="button">수정</a>
+                <a href= "/article_board/tmp_modify_reply/<%=r.id %>" class="btn btn-primary active" role="button">수정</a>
                 <a href = "/article_board/tmp_delete_reply/<%= r.id %>" class="btn btn-primary active" role="button">삭제</a>
             </div>
         <% end %>
@@ -46,14 +46,14 @@
 
 <br>
 
-<!-- Buttons --> 
+<!-- 글 수정, 삭제 --> 
 <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4">
         <center>
             <a href= "/article_board/tmp_modify/<%= @this_post.id%>" class="btn btn-primary active" role="button">수정</a>
             <a href = "/article_board/tmp_delete/<%= @this_post.id%>" class="btn btn-primary active" role="button">삭제</a>
-            <a href="/" class="btn btn-primary active" role="button">목록보기</a>
+            <a href="/article_board/tmp_mainpage" class="btn btn-primary active" role="button">목록보기</a>
         </center>
     </div>
     <div class="col-md-4"></div>
