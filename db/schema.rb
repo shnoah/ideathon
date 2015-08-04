@@ -21,6 +21,7 @@ ActiveRecord::Schema.define(version: 20150804034451) do
   create_table "articles", force: :cascade do |t|
     t.string   "title"
     t.string   "summary"
+    t.string   "password"
     t.text     "contents"
     t.string   "my_image"
     t.string   "contact_kakao"
@@ -47,6 +48,7 @@ ActiveRecord::Schema.define(version: 20150804034451) do
   end
 
   create_table "replies", force: :cascade do |t|
+    t.string   "writer"
     t.integer  "article_id"
     t.string   "contents"
     t.datetime "created_at", null: false

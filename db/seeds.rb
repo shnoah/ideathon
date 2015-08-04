@@ -14,6 +14,7 @@ article_seed1.title = "새로운 웨어러블"
 article_seed1.summary = "기술적 장벽때문에 본인의 생각을 세상 밖으로 표현하지 못하신 분들과 2013년 감동의 순간을 만들어 가고 싶습니다. 프로그래밍 경험 전혀 필요 없고, 심지어 컴맹이라도 상관없습니다. 기술적인 부분은 저희가 쌓아드립니다. 여러분이 집중 해야 할 일은 곧 세상에 태어날 여러분의 생각을 다듬"
 article_seed1.contents = "아이언맨을 만들거야!"
 article_seed1.contact_kakao = "카카오톡"
+article_seed1.password = "1234"
 article_seed1.contact_email = "이메일"
 article_seed1.demo_link = "google.com"
 article_seed1.leader_name = "토니 스타크"
@@ -44,6 +45,7 @@ article_seed2.title = "남현우 바보"
 article_seed2.summary = "엉망 진창 엉망 진창 엉망 진창 엉망 진창 엉망 진창 엉망 진창 엉망 진창 엉망 진창 엉망 진창 엉망 진창 엉망 진창 엉망 진창 엉망 진창 엉망 진창"
 article_seed2.contents = "소개팅좀"
 article_seed2.contact_kakao = "카카오톡"
+article_seed2.password = "1234"
 article_seed2.contact_email = "이메일"
 article_seed2.demo_link = "google.com"
 article_seed2.leader_name = "오현수"
@@ -78,6 +80,7 @@ article_seed3.contact_kakao = "카카오톡"
 article_seed3.contact_email = "이메일"
 article_seed3.demo_link = "google.com"
 article_seed3.leader_name = "이두희"
+article_seed3.password = "1234"
 
 article_seed3.save
 
@@ -105,6 +108,7 @@ article_seed4.contact_kakao = "카카오톡"
 article_seed4.contact_email = "이메일"
 article_seed4.demo_link = "google.com"
 article_seed4.leader_name = "코드"
+article_seed4.password = "1234"
 
 article_seed4.save
 
@@ -127,6 +131,7 @@ article_seed5.contact_kakao = "카카오55톡"
 article_seed5.contact_email = "이메55일"
 article_seed5.demo_link = "google.com555"
 article_seed5.leader_name = "코드555"
+article_seed5.password = "1234"
 
 article_seed5.save
 

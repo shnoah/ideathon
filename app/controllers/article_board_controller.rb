@@ -1,8 +1,33 @@
 class ArticleBoardController < ApplicationController
+  
+   before_action :authenticate_user!, only: [:tmp_write, :tmp_write_process]  
     
     def main_board        
         @tags = Tag.all
-        @articles = Article.all        
+        @articles = Article.all
+        
+        params_empty_check = params[:id]
+        
+        if params_empty_check == nil
+        @tag_params = Tag.find(1)
+    else
+        @tag_params = Tag.find(params[:id])
+        end
+    
+    end
+    
+    def tag
+        @tags = Tag.all
+        @articles = Article.all
+        
+        params_empty_check = params[:id]
+                if params_empty_check == nil
+        @tag_params = Tag.find(1)
+    else
+        @tag_params = Tag.find(params[:id])
+        end
+        redirect_to '/article_board/tag/?id=params[:id]'
+
     end
     
 ################################################################################
@@ -17,6 +42,9 @@ class ArticleBoardController < ApplicationController
     
 #상세페이지 
     def tmp_detailpage           
+        
+        
+        
         @this_post = Article.find(params[:id])  
     end
     
@@ -34,7 +62,8 @@ class ArticleBoardController < ApplicationController
         post.leader_name = params[:leader_name]
         post.contact_kakao = params[:contact_kakao]
         post.contact_email = params[:contact_email]
-        
+        post.password = params[:password]
+
         post.save          
         redirect_to '/'
     end
@@ -71,7 +100,8 @@ class ArticleBoardController < ApplicationController
     def tmp_write_reply
         @my_reply = Reply.new
         @my_reply.article_id = params[:article_id]
-        @my_reply.contents = params[:myreply]
+        @my_reply.writer = params[:email]
+        @my_reply.contents = params[:username] + " : " + params[:myreply]
         @my_reply.save
         
         redirect_to :back       
@@ -106,21 +136,65 @@ class ArticleBoardController < ApplicationController
     end
 
 #글 삭제시 사용    
-    def tmp_pw_chk       
+    def tmp_pw_chk_process_d
+        @this_post = Article.find(params[:id])
+    end
+    
+    def tmp_pw_chk_process_m 
+        @this_post = Article.find(params[:id])
+    end
+    
+    def tmp_article_modify     
         @flag=0
         @this_post = Article.find(params[:id]) 
         
-        match = params[:new_pwd]
+        match = params[:modify_password]
         
-        if (@this_post.post_pwd==match)
+        if (@this_post.password==match)
             @flag=1
-           
-            @this_post.destroy
-            redirect_to '/'       
+   
         else
             @flag = 0      
         end          
     end
+    
+    
+    def tmp_article_delete       
+        @flag=0
+        @this_post = Article.find(params[:id]) 
+        
+        match = params[:delete_password]
+        
+        if (@this_post.password==match)
+            @flag=1
+           
+            @this_post.destroy
+            
+        #    redirect_to '/'       
+        else
+            @flag = 0      
+        end          
+    end
+    
+    def tmp_write_member
+        @my_member = Member.new
+        @my_member.article_id = params[:member_id]
+        @my_member.name = params[:member_name]
+        @my_member.save
+        
+        redirect_to :back   
+    end
+    
+    def tmp_delete_member
+        @this_member = Member.find(params[:id])
+        
+        one_member = Member.find(@this_member.id)
+        one_member.destroy
+        
+        @this_page = @this_member.article_id
+        redirect_to action: "tmp_detailpage", id: @this_page 
+    end
+    
 end    
 
  

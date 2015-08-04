@@ -81,9 +81,17 @@
       </div>
       <ol class="breadcrumb">
         <% @tags.each do |a| %>
-        <li><a href="#">#<%=a.tagging%></a></li>
+        
+        <li><a href="/article_board/main_board/#tag?id=<%=a.id%>">#<%=a.tagging%></a></li>
         <%end%>
       </ol>
+      
+      
+      <%@tag_params.articles.each do |x|%>
+      <%=x.title%><br>
+      <%end%>
+      
+      
       
     </div>
 
@@ -97,7 +105,7 @@
       </div>
     
       <div class="row">
-    <% @articles.each do |item| %>
+    <% @articles.sample(3).each do |item| %>
         <div class="col-sm-6 col-md-3">
           <div class="thumbnail" style="height:645px">
             <img src="http://porch.com/advice/wp-content/uploads/2014/06/headshot-dimensions.gif" />
