@@ -50,8 +50,27 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body style="padding-top: 70px"> <!-- 임시 navbar 위한 여백 -->
 
+
+<!-- 임시 navbar-->
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container">
+    <p class="navbar-text navbar-right"><a href="/article_board/main_board" class="navbar-link">아이디어 보기</a></p>
+    <p class="navbar-text navbar-right"><a href="/article_board/write" class="navbar-link">아이디어 쓰기</a></p>
+
+<% if user_signed_in? %>
+   
+     <p class="navbar-text navbar-right"><a class="navbar-link" href="/users/sign_out" data-method="delete">로그아웃</a></p>
+   <p class="navbar-text navbar-right"><strong><%=current_user.name%></strong>님 환영합니다. </a></p>  
+   <% else %>
+      <p class="navbar-text navbar-right"> <a class="navbar-link"  href="/users/sign_in">로그인</a></p>
+      <p class="navbar-text navbar-right"> <a class="navbar-link"  href="/users/sign_up">회원가입</a></p>
+    <% end %>
+    
+    
+  </div>
+</nav>
 <%= yield %>
 
 </body>

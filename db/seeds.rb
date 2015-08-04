@@ -11,8 +11,8 @@
 article_seed1 = Article.new
 
 article_seed1.title = "새로운 웨어러블"
-article_seed1.summary = "기술적 장벽때문에 본인의 생각을 세상 밖으로 표현하지 못하신 분들과 2013년 감동의 순간을 만들어 가고 싶습니다. 프로그래밍 경험 전혀 필요 없고, 심지어 컴맹이라도 상관없습니다. 기술적인 부분은 저희가 쌓아드립니다. 여러분이 집중 해야 할 일은 곧 세상에 태어날 여러분의 생각을 다듬"
-article_seed1.contents = "아이언맨을 만들거야!"
+article_seed1.summary = "아이언맨을 만들거야!"
+article_seed1.contents = "기술적 장벽때문에 본인의 생각을 세상 밖으로 표현하지 못하신 분들과 2013년 감동의 순간을 만들어 가고 싶습니다. 프로그래밍 경험 전혀 필요 없고, 심지어 컴맹이라도 상관없습니다. 기술적인 부분은 저희가 쌓아드립니다. 여러분이 집중 해야 할 일은 곧 세상에 태어날 여러분의 생각을 다듬"
 article_seed1.contact_kakao = "카카오톡"
 article_seed1.password = "1234"
 article_seed1.contact_email = "이메일"

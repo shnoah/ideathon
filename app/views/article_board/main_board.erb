@@ -43,7 +43,14 @@
         <div class="col-sm-6 col-md-3">
           <a href="/article_board/detailpage/<%=item.id%>">
           <div class="thumbnail" style="height:645px">
-            <img src="http://porch.com/advice/wp-content/uploads/2014/06/headshot-dimensions.gif" />
+
+
+  <%if item.my_image.url==nil %>
+      <img src="http://porch.com/advice/wp-content/uploads/2014/06/headshot-dimensions.gif" />
+  <% else %> 
+            <img src="<%=item.my_image.url(:thumb)%>" />    
+  <% end %>
+
             <div class="caption">
               <h3><%= item.title %></h3>
               <p><%= item.summary %></p>
@@ -94,14 +101,21 @@
       <!--Case2: 해당 태그 article 표시-->
       <%else%>
       <div>
-      <h2>
+      <h2>#<%=@tag_params.tagging%></h2>
       </div>
       <div class="row"> <!-- 랜덤 탭과 동일 -->
         <%@tag_params.articles.shuffle.each do |x|%>
         <div class="col-sm-6 col-md-3">
         <a href="/article_board/detailpage/<%=x.id%>">
           <div class="thumbnail" style="height:645px">
-            <img src="http://porch.com/advice/wp-content/uploads/2014/06/headshot-dimensions.gif" />
+            
+              <%if item.my_image.url==nil %>
+                  <img src="http://porch.com/advice/wp-content/uploads/2014/06/headshot-dimensions.gif" />
+              <% else %> 
+                  <img src="<%=item.my_image.url(:thumb)%>" />    
+              <% end %>
+
+          
             <div class="caption">
               <h3><%= x.title %></h3>
               <p><%= x.summary %></p>
@@ -138,7 +152,14 @@
         <div class="col-sm-6 col-md-3">
         <a href="/article_board/detailpage/<%=item.id%>">
           <div class="thumbnail" style="height:645px">
-            <img src="http://porch.com/advice/wp-content/uploads/2014/06/headshot-dimensions.gif" />
+          
+          <%if item.my_image.url==nil %>
+                  <img src="http://porch.com/advice/wp-content/uploads/2014/06/headshot-dimensions.gif" />
+          <% else %> 
+                  <img src="<%=item.my_image.url(:thumb)%>" />    
+          <% end %>
+          
+          
             <div class="caption">
               <h3><%= item.title %></h3>
               <p><%= item.summary %></p>

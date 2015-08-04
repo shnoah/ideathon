@@ -1,5 +1,5 @@
 Rails.application.configure do
-  config.action_mailer.default_url_options = { host: 'hackathon-woodykim-1.c9.io', port: 80 }
+  config.action_mailer.default_url_options = { host: 'hackathon-woodykim.c9.io/article_board/main_board', port: 80 }
   # Settings specified here will take precedence over those in config/application.rb.
 
   # In the development environment your application's code is reloaded on

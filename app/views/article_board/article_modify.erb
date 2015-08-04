@@ -19,7 +19,8 @@
               <div class="form-group">
                 <label class="col-lg-2 control-label">한줄 설명</label>
                 <div class="col-lg-10">
-                  <input type="text" class="form-control"  name="summary" value="<%=@this_post.summary%>" required>
+                  <input type="text" class="form-control" maxlength="160" name="summary" value="<%=@this_post.summary%>" required>
+                  <span class="help-block">160자까지 가능합니다.</span>
                 </div>
               </div>
               
