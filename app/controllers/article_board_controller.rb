@@ -6,11 +6,19 @@ class ArticleBoardController < ApplicationController
         @tags = Tag.all
         @articles = Article.all
         
-        if params[:id].blank?
-        else
-        @tag_params = Tag.find(params[:id])
+        unless params[:id].blank?
+            @tag_params = Tag.find(params[:id])
         end
     
+    end
+    
+    def like_process
+        liked_article = Article.find(params[:id].to_i)
+        current_user.articles << liked_article
+        liked_article.like += 1
+        liked_article.save
+        
+        redirect_to '/article_board/main_board'
     end
     
 ################################################################################

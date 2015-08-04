@@ -39,37 +39,42 @@
       </div>
 
       <div class="row">
-        <% @articles.each do |item| %>
-        <div class="col-sm-6 col-md-3">
-          <a href="/article_board/detailpage/<%=item.id%>">
-          <div class="thumbnail" style="height:645px">
-
-
-  <%if item.my_image.url==nil %>
-      <img src="http://porch.com/advice/wp-content/uploads/2014/06/headshot-dimensions.gif" />
-  <% else %> 
-            <img src="<%=item.my_image.url(:thumb)%>" />    
-  <% end %>
-
-            <div class="caption">
-              <h3><%= item.title %></h3>
-              <p><%= item.summary %></p>
-              <div align="right">   <!--팀장명 오른쪽 정렬 처리-->
-               - <%= item.leader_name %>
-               </div>
-              <hr>
-              <div> <!--이 div가 .caption의 아래쪽 정렬 필요-->
-                <div align="center">
-                  오늘의 <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp;30
-                </div><br>
-                  <% item.tags.each do |tag| %>
-                  #<%= tag.tagging%>
-                  <%end%>
+        <% @articles.sample(@articles.count).each do |item| %>
+          <div class="col-sm-6 col-md-3">
+            <div class="thumbnail" style="height:645px">
+              <a href="/article_board/detailpage/<%=item.id%>">
+              <%if item.my_image.url==nil %>
+                <img src="http://porch.com/advice/wp-content/uploads/2014/06/headshot-dimensions.gif" />
+              <% else %> 
+                <img src="<%=item.my_image.url(:thumb)%>"/>    
+              <% end %>
+              </a>
+              <div class="caption">
+                <h3><%= item.title %></h3>
+                <p><%= item.summary %></p>
+                <div align="right">   <!--팀장명 오른쪽 정렬 처리-->
+                 - <%= item.leader_name %>
+                 </div>
+                <hr>
+                <div> <!--이 div가 .caption의 아래쪽 정렬 필요-->
+                  <div align="center">
+                    <% if user_signed_in? %>
+                      <% if current_user.articles.include? item %>
+                        <button class="btn btn-default">좋아요<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp;<%= item.like %></button>
+                      <% else %>
+                        <a href="/article_board/like_process/<%= item.id %>" class="btn btn-default" type="submit">좋아요<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp;<%= item.like %></a>
+                      <% end %>
+                    <% else %>
+                      <button class="btn btn-default">좋아요<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp;<%= item.like %></button>
+                    <% end %>
+                  </div><br>
+                    <% item.tags.each do |tag| %>
+                    #<%= tag.tagging%>
+                    <%end%>
+                </div>
               </div>
             </div>
           </div>
-          </a>
-        </div>
         <%end%>
       </div>
     </div>
@@ -109,10 +114,10 @@
         <a href="/article_board/detailpage/<%=x.id%>">
           <div class="thumbnail" style="height:645px">
             
-              <%if item.my_image.url==nil %>
+              <%if x.my_image.url==nil %>
                   <img src="http://porch.com/advice/wp-content/uploads/2014/06/headshot-dimensions.gif" />
               <% else %> 
-                  <img src="<%=item.my_image.url(:thumb)%>" />    
+                  <img src="<%=x.my_image.url(:thumb)%>" />    
               <% end %>
 
           
@@ -125,7 +130,7 @@
               <hr>
               <div style="vertical-align: bottom">
                 <div align="center">
-                  오늘의 <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp;30
+                  오늘의 <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp;<%= item.like %>
                 </div><br>
                   <% x.tags.each do |tag| %>
                   #<%= tag.tagging%>
@@ -142,23 +147,29 @@
 
   
     <!-- My likes -->
+    <% unless user_signed_in?%>
+    <div role="tabpanel" class="tab-pane fade" id="likes">
+      <div class="page-header">
+        <h1><small>내 찜 기능을 이용하려면 로그인을 해주세요!</small></h1>
+      </div>
+    </div>
+    <% else %>
     <div role="tabpanel" class="tab-pane fade" id="likes">
       <div class="page-header">
         <h1><small>내가 '좋아요'한 아이디어를 모아볼 수 있습니다. 좋아요 개수가 매일 초기화되는 것과 별개로 저장됩니다.</small></h1>
       </div>
     
       <div class="row">
-      <% @articles.each do |item| %>
+      <% current_user.articles.each do |item| %>
         <div class="col-sm-6 col-md-3">
-        <a href="/article_board/detailpage/<%=item.id%>">
           <div class="thumbnail" style="height:645px">
-          
-          <%if item.my_image.url==nil %>
-                  <img src="http://porch.com/advice/wp-content/uploads/2014/06/headshot-dimensions.gif" />
-          <% else %> 
-                  <img src="<%=item.my_image.url(:thumb)%>" />    
-          <% end %>
-          
+            <a href="/article_board/detailpage/<%=item.id%>">
+            <%if item.my_image.url==nil %>
+              <img src="http://porch.com/advice/wp-content/uploads/2014/06/headshot-dimensions.gif" />
+            <% else %> 
+              <img src="<%=item.my_image.url(:thumb)%>" />    
+            <% end %>
+            </a>
           
             <div class="caption">
               <h3><%= item.title %></h3>
@@ -169,7 +180,7 @@
               <hr>
               <div style="vertical-align: bottom">
                 <div align="center">
-                  오늘의 <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp;30
+                  오늘의 <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp;<%= item.like %>
                 </div><br>
                   <% item.tags.each do |tag| %>
                   #<%= tag.tagging%>
@@ -177,10 +188,11 @@
               </div>
             </div>
           </div>
-        </a>
         </div>
-        <%end%>
+      <%end%>
       </div>
     </div>
+    <% end %>
+    
   </div>
 </div>

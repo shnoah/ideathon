@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150804034451) do
+ActiveRecord::Schema.define(version: 20150804143708) do
 
   create_table "article_images", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -29,14 +29,22 @@ ActiveRecord::Schema.define(version: 20150804034451) do
     t.string   "demo_link"
     t.string   "leader_name"
     t.string   "member_name"
-    t.string   "score"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.integer  "score",         default: 0
+    t.integer  "like",          default: 0
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
   end
 
   create_table "articles_tags", id: false, force: :cascade do |t|
     t.integer  "article_id"
     t.integer  "tag_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "articles_users", id: false, force: :cascade do |t|
+    t.integer  "article_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
