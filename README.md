@@ -13,6 +13,11 @@ Ideathon
 
 
 
+- 15/08/05 노승호 업데이트
+    - 글쓰기는 서비스명/글비밀번호/한줄설명/상세설명 말고는 입력안해도 글 올라가게 수정
+    - 데모 링크 없으면 링크 표시 X
+    - ID 당 글 1개만 처리
+    - 글쓸 때 비밀번호 text->password로 타입 변경
 
 - 그냥 메모..
     - /views/devise/sessions/new.html.erb - login page 

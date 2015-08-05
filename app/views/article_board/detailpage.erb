@@ -19,9 +19,14 @@
 <!-- 이미지 -->         
         <p><center><img class="img-responsive" src="<%= @this_post.my_image.url %>"></center></p>
 <!-- demo link -->
+        <% if @this_post.demo_link == nil || @this_post.demo_link == "" %>
+        <% else %>
+
         <h2><center><a href="http://<%= @this_post.demo_link %>" target="_blank">Demo link</a></center></h2>
+        <%end %>
         <br>
         <br>
+        
 <!-- 리더 -->
         <p align="left">팀 리더 : <%= @this_post.leader_name%></p>
         <br>
@@ -54,6 +59,12 @@
             <div class="col-md-1"><input class="btn btn-success" type = "submit" value = "Reply"></div>
         </form>
     </div>
+    <!-- 좋아요 버튼 -->
+    <% if current_user.articles.include? @this_post %>
+      <a href="/article_board/like_delete/<%= @this_post.id %>" class="btn btn-default" type="submit">좋아요<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp;<%= @this_post.like %></a>
+    <% else %>
+      <a href="/article_board/like_process/<%= @this_post.id %>" class="btn btn-default" type="submit">좋아요<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp;<%= @this_post.like %></a>
+    <% end %>
     <!--로그인을 하지 않은 경우 -->
 <%else %>
         <div class="alert alert-danger" role="alert">
@@ -62,6 +73,8 @@
           리플을 달려면 로그인을 해주세요
         </div>
     </div>
+    <!-- 좋아요 버튼 -->
+    <button class="btn btn-default">좋아요<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp;<%= item.like %></button>
 <%end%>
 
       

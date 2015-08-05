@@ -50,15 +50,15 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 </head>
-<body style="padding-top: 5em"> <!-- 임시 navbar 위한 여백 -->
+<body style="padding-top: 11em"> <!-- 임시 navbar 위한 여백 -->
 
 
 <!-- 임시 navbar-->
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
+    <p class="navbar-text navbar-left"><a href="https://h22-woodykim-1.c9.io/" class="navbar-link"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></p>
     <p class="navbar-text navbar-right"><a href="/article_board/main_board" class="navbar-link">아이디어 보기</a></p>
     <p class="navbar-text navbar-right"><a href="/article_board/write" class="navbar-link">아이디어 쓰기</a></p>
-
 <% if user_signed_in? %>
    
      <p class="navbar-text navbar-right"><a class="navbar-link" href="/users/sign_out" data-method="delete">로그아웃</a></p>

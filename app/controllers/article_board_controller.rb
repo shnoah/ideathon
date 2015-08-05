@@ -6,19 +6,35 @@ class ArticleBoardController < ApplicationController
         @tags = Tag.all
         @articles = Article.all
         
-        unless params[:id].blank?
-            @tag_params = Tag.find(params[:id])
+        if params[:id].blank?
+        else
+        @tag_params = Tag.find(params[:id])
         end
     
     end
     
     def like_process
-        liked_article = Article.find(params[:id].to_i)
-        current_user.articles << liked_article
-        liked_article.like += 1
-        liked_article.save
+        id = params[:id].to_i
+        liked_article = Article.find(id)
+        if current_user.articles.include? liked_article
+            1/0 #광클 방지
+        else
+            current_user.articles << liked_article
+            liked_article.like += 1
+            liked_article.save
+        end
         
-        redirect_to '/article_board/main_board'
+        redirect_to "/article_board/detailpage/#{id}"
+    end
+    
+    def like_delete
+        id = params[:id].to_i
+        canceled_article = Article.find(id)
+        current_user.articles.delete(canceled_article)
+        canceled_article.like -= 1
+        canceled_article.save
+        
+        redirect_to "/article_board/detailpage/#{id}"
     end
     
 ################################################################################
@@ -37,24 +53,35 @@ class ArticleBoardController < ApplicationController
     end
     
     def write    
+       
+            
     end
     
     def write_process
-        post = Article.new
-
-        post.title =params[:title]
-        post.summary = params[:summary]
-        post.contents = params[:contents]
-        post.demo_link = params[:demo_link]
-        post.my_image = params[:image_file]
-        post.leader_name = params[:leader_name]
-        post.contact_kakao = params[:contact_kakao]
-        post.contact_email = params[:contact_email]
-        post.password = params[:password]
-        post.member_name = params[:member_name]
-
-        post.save          
-        redirect_to '/'
+        
+            
+            tmp = User.find(current_user.id)
+            tmp.posting_check =1
+            tmp.save
+            #한 ID 당 글은 1개만
+            
+            post = Article.new
+    
+            post.title =params[:title]
+            post.summary = params[:summary]
+            post.contents = params[:contents]
+            post.demo_link = params[:demo_link]
+            post.my_image = params[:image_file]
+            post.leader_name = params[:leader_name]
+            post.contact_kakao = params[:contact_kakao]
+            post.contact_email = params[:contact_email]
+            post.password = params[:password]
+            post.member_name = params[:member_name]
+    
+            post.save          
+            redirect_to '/article_board/main_board'
+    
+      
     end
     
 #수정 페이지로    
@@ -153,6 +180,8 @@ class ArticleBoardController < ApplicationController
     
     
     def article_delete       
+
+        
         @flag=0
         @this_post = Article.find(params[:id]) 
         
@@ -160,7 +189,12 @@ class ArticleBoardController < ApplicationController
         
         if (@this_post.password==match)
             @flag=1
-           
+            
+            
+            tmp = User.find(current_user.id)
+            tmp.posting_check = 0
+            tmp.save
+            
             @this_post.destroy
             
         #   redirect_to '/'       
