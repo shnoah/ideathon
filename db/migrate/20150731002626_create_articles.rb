@@ -14,6 +14,7 @@ class CreateArticles < ActiveRecord::Migration
       t.string :member_name 
       t.integer :score, default: 0
       t.integer :like, default: 0
+      t.boolean :fame, default: false
 
       t.timestamps null: false
     end

@@ -10,11 +10,33 @@
   <%= csrf_meta_tags %>
     <meta charset="UTF-8">
     
+      <title>멋사해커톤 공식홈페이지</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+ 
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
+  <link rel="icon"type="image/png" href="/image/pavicon.png" />
+  
+  <!-- 디자인 추가 -->
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <!-- Optional theme -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+  <!-- 디자인 추가 -->  
+    
     
     <script src="/javascripts/imagesloaded.pkgd.min.js"></script>
         
-        
-    <title>Coverr - Beautiful, free videos for your homepage</title>
+      
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>-->
     <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
@@ -31,7 +53,7 @@
     <meta property="og:description" content="Beautiful, free videos for your homepage background"/>
     <meta property="og:image" content="http://www.coverr.co/media/cover-meta.png"/>
     <meta name="google-site-verification" content="PUIw6OhsS-xx6WGCH6u_H8ISVMLVvj7VTgvFNXF-KqA" />
-<meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     <style>.ig-b- { display: inline-block; }
     .ig-b- img { visibility: hidden; }
     .ig-b-:hover { background-position: 0 -60px; } .ig-b-:active { background-position: 0 -120px; }
@@ -56,21 +78,35 @@
 <!-- 임시 navbar-->
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container">
-    <p class="navbar-text navbar-left"><a href="https://h22-woodykim-1.c9.io/" class="navbar-link"><span class="glyphicon glyphicon-home" aria-hidden="true"></span></a></p>
+    <p class="navbar-text navbar-left"><a href="https://h22-woodykim-1.c9.io/" class="navbar-link"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>홈으로</a></p>
     <p class="navbar-text navbar-right"><a href="/article_board/main_board" class="navbar-link">아이디어 보기</a></p>
-    <p class="navbar-text navbar-right"><a href="/article_board/write" class="navbar-link">아이디어 쓰기</a></p>
+    <p class="navbar-text navbar-left"><a href="/article_board/hall_of_fame" class="navbar-link">명예의 전당</a></p>
 <% if user_signed_in? %>
-   
-     <p class="navbar-text navbar-right"><a class="navbar-link" href="/users/sign_out" data-method="delete">로그아웃</a></p>
+
+
+     <p class="navbar-text navbar-right"><a class="navbar-link" href="/users/sign_out">로그아웃</a></p>
+
+    <% if current_user.my_article_id==nil%>
+
+      <p class="navbar-text navbar-right"><a href="/article_board/write" class="navbar-link">아이디어 쓰기</a></p>
+
+    <% else %>
+
+       <p class="navbar-text navbar-right"><a class="navbar-link" href="/article_board/detailpage/<%=current_user.my_article_id%>">내가 쓴 아이디어 보기</a></p>
+
+    <% end %>
+  
    <p class="navbar-text navbar-right"><strong><%=current_user.name%></strong>님 환영합니다. </a></p>  
+
    <% else %>
+
       <p class="navbar-text navbar-right"> <a class="navbar-link"  href="/users/sign_in">로그인</a></p>
       <p class="navbar-text navbar-right"> <a class="navbar-link"  href="/users/sign_up">회원가입</a></p>
+
     <% end %>
-    
-    
   </div>
 </nav>
+
 <%= yield %>
 
 </body>

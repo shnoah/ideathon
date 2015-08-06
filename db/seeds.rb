@@ -49,6 +49,7 @@ article_seed2.password = "1234"
 article_seed2.contact_email = "이메일"
 article_seed2.demo_link = "google.com"
 article_seed2.leader_name = "오현수"
+article_seed2.like = 500
 
 article_seed2.save
 
@@ -109,7 +110,7 @@ article_seed4.contact_email = "이메일"
 article_seed4.demo_link = "google.com"
 article_seed4.leader_name = "코드"
 article_seed4.password = "1234"
-
+article_seed4.like = 3
 article_seed4.save
 
 member = Member.new

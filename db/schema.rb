@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150804143708) do
+ActiveRecord::Schema.define(version: 20150805121750) do
 
   create_table "article_images", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -31,20 +31,14 @@ ActiveRecord::Schema.define(version: 20150804143708) do
     t.string   "member_name"
     t.integer  "score",         default: 0
     t.integer  "like",          default: 0
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.boolean  "fame",          default: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
   end
 
   create_table "articles_tags", id: false, force: :cascade do |t|
     t.integer  "article_id"
     t.integer  "tag_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "articles_users", id: false, force: :cascade do |t|
-    t.integer  "article_id"
-    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -63,6 +57,15 @@ ActiveRecord::Schema.define(version: 20150804143708) do
     t.string   "contents"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "statuses", force: :cascade do |t|
+    t.integer  "article_id"
+    t.integer  "user_id"
+    t.boolean  "liked",      default: false
+    t.boolean  "selected",   default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
   end
 
   create_table "tags", force: :cascade do |t|

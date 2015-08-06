@@ -6,6 +6,10 @@ class ArticleBoardController < ApplicationController
         @tags = Tag.all
         @articles = Article.all
         
+        if user_signed_in?
+            @selected_articles = current_user.articles.where(statuses: {selected: true})
+        end
+        
         if params[:id].blank?
         else
         @tag_params = Tag.find(params[:id])
@@ -16,10 +20,15 @@ class ArticleBoardController < ApplicationController
     def like_process
         id = params[:id].to_i
         liked_article = Article.find(id)
-        if current_user.articles.include? liked_article
-            1/0 #광클 방지
-        else
-            current_user.articles << liked_article
+        unless current_user.articles.where(statuses: {liked: true}).include? liked_article
+            if current_user.statuses.where(article_id: id).empty?
+                Status.create(user: current_user, article: liked_article, liked: true, selected: true)
+            else
+                stat = current_user.statuses.where(article_id: id).take
+                stat.liked = true
+                stat.selected = true
+                stat.save
+            end
             liked_article.like += 1
             liked_article.save
         end
@@ -30,9 +39,20 @@ class ArticleBoardController < ApplicationController
     def like_delete
         id = params[:id].to_i
         canceled_article = Article.find(id)
-        current_user.articles.delete(canceled_article)
+        stat = current_user.statuses.where(article_id: id).take
+        stat.liked = false
+        stat.save
         canceled_article.like -= 1
         canceled_article.save
+        
+        redirect_to "/article_board/detailpage/#{id}"
+    end
+    
+    def select_delete
+        id = params[:id].to_i
+        stat = current_user.statuses.where(article_id: id).take
+        stat.selected = false
+        stat.save
         
         redirect_to "/article_board/detailpage/#{id}"
     end
@@ -60,10 +80,7 @@ class ArticleBoardController < ApplicationController
     def write_process
         
             
-            tmp = User.find(current_user.id)
-            tmp.posting_check =1
-            tmp.save
-            #한 ID 당 글은 1개만
+            
             
             post = Article.new
     
@@ -78,7 +95,15 @@ class ArticleBoardController < ApplicationController
             post.password = params[:password]
             post.member_name = params[:member_name]
     
-            post.save          
+            post.save    
+            
+            tmp = User.find(current_user.id)
+            
+            tmp.posting_check =1             #한 ID 당 글은 1개만
+            tmp.my_article_id = post.id      #자신이 쓴 글번호 저장
+            
+            tmp.save
+            
             redirect_to '/article_board/main_board'
     
       
@@ -147,6 +172,7 @@ class ArticleBoardController < ApplicationController
         one_reply.destroy
         
         @this_page = @this_post.article_id
+        
         redirect_to action: "detailpage", id: @this_page      
     end
 
@@ -193,6 +219,7 @@ class ArticleBoardController < ApplicationController
             
             tmp = User.find(current_user.id)
             tmp.posting_check = 0
+            tmp.my_article_id = nil
             tmp.save
             
             @this_post.destroy
@@ -202,6 +229,30 @@ class ArticleBoardController < ApplicationController
             @flag = 0      
         end          
     end
+    
+    
+    ##
+    def hall_of_fame
+        @best_id     = ""
+        @best_num    =0
+        
+        @best_id1 =""
+        @best_num1 =0
+        
+        @articles = Article.all.where(:fame => false)
+        
+        
+        ## 해시 사용 버젼
+        #candidates = Hash.new
+        #@articles.each do |item|
+        #    candidates[item] = item.like
+        #end
+        
+        #sorted_candidates = candidates.sort_by { |key, value| value }
+        
+        #@real_best = sorted_candidates[-1][0]
+    end
+    
     
 end
 ################################################################################

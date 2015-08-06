@@ -148,7 +148,7 @@
         </div>
       
         <div class="row">
-          <% current_user.articles.shuffle.each do |item| %>
+          <% @selected_articles.each do |item| %>
             <div class="col-sm-6 col-md-3">
               <div class="thumbnail" style="height:645px">
                 <a href="/article_board/detailpage/<%=item.id%>">
