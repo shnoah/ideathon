@@ -1,5 +1,6 @@
 =========================
 Ideathon
+
 =========================
 
 
@@ -8,7 +9,7 @@ Ideathon
     - google analytic
     - 크롬 최적화 문구 
     - 절대 주소 -> 상대 주소 
-    - 서버 구동 관련 물어보기. 누군가가 putty를 계속 구동해야하는지?
+    - 서버 구동 관련 물어보기. 누군가가 putty를 계속 구동해야하는지? - nginx + passenger !
 
 - 15/08/05 노승호 업데이트
     - 글쓰기는 서비스명/글비밀번호/한줄설명/상세설명 말고는 입력안해도 글 올라가게 수정
@@ -20,10 +21,13 @@ Ideathon
 
 - 15/08/08
     - AWS로 이주 테스트 
-    - json 파싱..
+    - json 파싱 테스트 완료
+    - 로그인 세션 일 정 시간 후 종료?
+    - 
     
     
 - 그냥 메모..
     - /views/devise/sessions/new.html.erb - login page 
     - /views/uploads/s3uploder_uploader.rb - image size
+    - http://json.parser.online.fr/ - json 파일 검사
 

@@ -172,3 +172,29 @@ Article.find(article_seed5a.id).tags << tag
 tag = Tag.find_by_tagging("시드5")||Tag.create(:tagging => "시드5", :created_at => article_seed5a.id)
 Article.find(article_seed5a.id).tags << tag
 
+
+############################# json test
+
+
+@data_hash = Hash.new
+path=Rails.root.to_s
+
+file = File.read(path+'/public/userdbsample.json')
+@data_hash = JSON.parse(file)
+
+for x in 0..2
+
+   u = User.new(
+        
+              :email => @data_hash["user_list"][x]["email"].to_s,
+              :name => @data_hash["user_list"][x]["name"].to_s,
+              :encrypted_password => @data_hash["user_list"][x]["password"].to_s,
+              :university => @data_hash["user_list"][x]["school"].to_s       
+        )
+    u.save!(:validate => false)          
+          
+
+end
+
+
+

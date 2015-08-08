@@ -1,0 +1,31 @@
+{
+  "user_list": [
+	{
+      "email": "shnoah@gmail.com", 
+      "mobile": "01051208808", 
+      "name": "\ub178\uc2b9\ud638", 
+      "password": "$2a$12$FghUcRR5EK6iVsng8vOn2.nZCo8Y6YMXGzuMN1Sv3mlhpXwa9fH/S", 
+      "role": "LEADER", 
+      "school": "\uc131\uade0\uad00\ub300\ud559\uad50", 
+      "team": "\uba4b\uc7c1\uc774 \uacf5\uc790\ucc98\ub7fc"
+   	 },
+ {
+      "email": "humn9136@gmail.com", 
+      "mobile": "01079305665", 
+      "name": "\uac15\ud615\ubbfc", 
+      "password": "$2a$12$hPrCLu3u8S8NPXasut831uPixUuWVdTRFwO3S4cmQkIcU/F7o7LVO", 
+      "role": "USER", 
+      "school": "UNIST", 
+      "team": "\uc544\uce68\ud615\uc778\uac04"
+    }, 
+    {
+      "email": "dltjq0730@unist.ac.kr", 
+      "mobile": "01044481828", 
+      "name": "\uae40\uc774\uc12d", 
+      "password": "$2a$12$sEDqDJu.0X8nKR/1uAdoK.ATvfd.m6ddVlDtkCgNcmmHXiT/XkONu", 
+      "role": "USER", 
+      "school": "UNIST", 
+      "team": "\uc544\uce68\ud615\uc778\uac04"
+    }
+  ]
+}

@@ -10,9 +10,10 @@ class ArticleBoardController < ApplicationController
     
     def json_test
         
+       @data_hash = Hash.new
         path=Rails.root.to_s
+        file = File.read(path+'/public/userdbsample.json')
     
-        file = File.read(path+'/public/test.json')
         @data_hash = JSON.parse(file)
        
        
@@ -211,7 +212,7 @@ class ArticleBoardController < ApplicationController
         one_reply = Reply.find(@this_post.id)
         one_reply.destroy
         
-        @this_page = @this_post.article_id
+        @this_page =    @this_post.article_id
         
         redirect_to action: "detailpage", id: @this_page      
     end
@@ -330,8 +331,53 @@ class ArticleBoardController < ApplicationController
      #각 유저와의 연결도 초기화하는 것을만들어야 함.
       redirect_to '/article_board/hall_of_fame/'
             
-     #######################################################################%>    
+     #######################################################################%>     
+    end
+    
+    def freeboard
+        @fr=Freearticle.all
+       
         
+
+    end
+    
+    
+    def freeboard_detail
+        
+        @this_article = Freearticle.find(params[:id])
+        
+    end
+    
+    
+    def freeboard_modify
+        
+        @this_article = Freearticle.find(params[:m_id])
+        
+    end
+    
+    
+    def freeboard_modify_action
+        
+        fm= Freearticle.where
+        
+        redirect_to '/article_board/freeboard_detail/'
+    end
+    
+    
+    def freeboard_write
+        
+    end
+    
+    
+    def freeboard_write_action
+     fa =Freearticle.new
+     fa.free_article = params[:f_contents]
+     fa.free_title=params[:f_title]
+     fa.free_password=params[:f_password]
+     fa.free_writer=current_user.name
+     fa.save
+     
+     redirect_to '/article_board/freeboard'
     end
     
     

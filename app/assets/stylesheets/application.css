@@ -18,7 +18,6 @@
  @import "article_board.css";
 
 
-
 #test{
 
 color: black;
@@ -84,9 +83,9 @@ box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
     display: block;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     color: #717171;
-    margin-bottom: 15px;
     font-size: 100%;
     font-weight: 600;
+    margin-bottom: 10px;
 }
 .form-style-10 input[type="text"],
 .form-style-10 input[type="date"],
@@ -105,6 +104,7 @@ box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
     -moz-box-sizing: border-box;
     width: 100%;
     padding: 8px;
+    font-size: 15px;
     border-radius: 6px;
     -webkit-border-radius:6px;
     -moz-border-radius:6px;
@@ -112,6 +112,8 @@ box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
     box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
     -moz-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
     -webkit-box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
+    margin-top: 7px;
+    
 }
 
 .form-style-10 .section{
@@ -119,7 +121,7 @@ box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
     color: #f99636;
     margin-bottom: 5px;
     font-weight: 900;
-    font-size: 120%;
+    font-size: 150%;
 }
 .form-style-10 .section span {
     background: #f99636;
@@ -137,26 +139,22 @@ box-shadow: inset 0px 1px 1px rgba(0, 0, 0, 0.33);
 .form-style-10 input[type="button"], 
 .form-style-10 input[type="submit"]{
     background: #f99636;
-    padding: 8px 20px 8px 20px;
+    padding: 12px 30px 12px 30px;
+    margin: 0px 5px 0px 5px;
     border-radius: 5px;
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    color: #fff;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
-    font: normal 30px 'Bitter', serif;
-    -moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
-    -webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
-    box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.17);
-    border: 1px solid #f99636;
+    color: white;;
+    font-weight: 700;
     font-size: 15px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.12);
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    border: 1px solid #f99636;
 }
 .form-style-10 input[type="button"]:hover, 
 .form-style-10 input[type="submit"]:hover{
-    background: #2A6881;
-    -moz-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
-    -webkit-box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
-    box-shadow: inset 0px 2px 2px 0px rgba(255, 255, 255, 0.28);
+    background: #EA8D33;
 }
+
+
 .form-style-10 .privacy-policy{
     float: right;
     width: 250px;

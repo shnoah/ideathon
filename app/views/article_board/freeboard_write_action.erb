@@ -1,0 +1,51 @@
+
+       <div class="col-md-12" style="height:auto;; text-align:center; border-top: 1px solid #b7b7b7; border-bottom: 1px solid #b7b7b7; background-color: #e5e5e5; margin:0px 0px 0px 0px;"> 
+        <div style="padding: 27px 0px 30px 0px;">
+          <span style="font-weight: 800; color:#727272; font-size: 120%;">아이디어 제출 |</span> 
+          <span style="font-weight: 500;color:#b2b2b2; font-size: 120%;">&nbsp;아이디어를 제출 마감은 8월23일(일)입니다</span>
+        </div>
+      </div>
+     
+     <div class="col-md-12 col-sm-12 co-xs-12">
+     <div class="form-style-10">
+          <form action="/article_board/write_process" method="POST" enctype="multipart/form-data" name="write_form" onsubmit="return overTag()">
+            <input type="hidden" value="<%=current_user.email%>" name="posting_check_email">
+              <div class="section">✔ 서비스소개</div>
+              <div class="inner-wrap">
+                  <label>서비스명(필수) <input type="text" name="title" placeholder="서비스명을 입력해주세요." required/></label>
+                  <label>한줄설명(필수) <input type="text" maxlength="20" name="summary"placeholder="서비스를 한문장으로 요약해주세요.(20자)" required /></label>
+                  <label>데모링크 <input type="text" name="demo_link" value="http://" placeholder="데모 링크를 걸어주세요. (http://는 제외하고 주소만 입력해주세요.)" /></label>      
+                  <label>상세설명(필수) <textarea rows="3" name="contents" required></textarea></label>
+                  <label>태그(필수) <input type="text" name="tag" placeholder="#맞팔#소통 금지 (미구현) (256Bytes)" required></input></label>
+                  <label>이미지첨부 <div id="test"> <input type=file name="image_file"> </div>
+              </div>
+          
+              <div class="section">✔ 팀/자기소개</div>
+              <div class="inner-wrap">
+                  <label>팀대표자<input type="text" name="leader_name" placeholder="학교명/이름" /></label>
+                  <label>팀구성원 <input type="text" name="member_name" placeholder="학교명/이름" /></label>
+              </div>
+          
+              <div class="section">✔ 연락처</div>
+                  <div class="inner-wrap">
+                  <label>카카오톡<input type="" name="field5" /></label>
+                  <label>이메일 <input type="password" name="field6" /></label>
+              </div>
+              
+              <div class="section">✔ 비밀번호</div>
+                  <div class="inner-wrap">
+                  <label>카카오톡<input type="password" name="field5" /></label>
+                  <label>이메일 <input type="password" name="field6" /></label>
+              </div>
+              
+              
+              <div class="button-section">
+               <input type="submit" name="Sign Up" />
+               <span class="privacy-policy">
+               <input type="checkbox" name="field7">You agree to our Terms and Policy. 
+               </span>
+              </div>
+          </form>
+          </div>
+     </div>
+     

@@ -1,9 +1,10 @@
-<% @data_hash.each do |title,url,posts| %>
-     
-     <%= title %><br>
-     <%= url %> <br>
-     <%= posts %>
-     
-     <p></p>
-     
-<%end %>
+
+<% for x in 0..2 %>
+
+<%= @data_hash["user_list"][x]["email"] %><p>
+<%= @data_hash["user_list"][x]["name"] %><p>
+<%= @data_hash["user_list"][x]["password"] %><p>
+<%= @data_hash["user_list"][x]["school"] %><p>
+
+
+<% end %>

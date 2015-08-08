@@ -1,0 +1,27 @@
+<%= render :partial => "/article_board/navbar" %> 
+    
+    <div class="container">
+    <div class="form-style-10">
+<!-- 본문 -->   
+<!-- 상세 설명 -->         
+        <p style = "color:black">
+        <div class="row">
+         
+         <h1 style ="width: 90%"><%= @this_article.free_title %></h1>
+         
+         <br>
+
+         <div class="col-lg-12" style="word-break:break-all"><%=@this_article.free_article%></div>
+            <!-- word-break:break-all : 숫자, 영문 연속 입력시 강제개행 -->
+        
+        </div>
+         </p>
+         <form action = "/article_board/freeboard_modify">
+         <div class= "button-section"> 
+         <input type = "hidden" value="<%=@this_article.id%>" name="m_id">
+         <input type = "submit" value="수정"></div>
+         </form>
+        </div>
+        </div>
+       
+  
