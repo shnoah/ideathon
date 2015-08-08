@@ -1,0 +1,80 @@
+
+
+
+
+ <nav class="navbar navbar-custom navbar-fixed-top" style="background-color: #2D2D2D;"  role="navigation" >
+        <div class="container"   style="width: 93%;">
+            <div class="navbar-header" >
+                <button style="color: #EB8E34;" type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-main-collapse">
+                    <i class="fa fa-bars"></i>
+                </button>
+                   <a  class="navbar-brand page-scroll" href="/article_board/main_board" style="padding-left: 5px;">
+                    <image id="top_logo" src="/image/logo.png" style="padding-top: -2px; height: 100%;">
+                </a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right navbar-main-collapse" style="padding-top: 12px;">
+                <ul class="nav navbar-nav">
+                    <!-- Hidden li included to remove active class from about link when scrolled up past about section -->
+                    
+                    <% if user_signed_in? %>
+                        
+                        
+                    <li>
+                       <a><span style="color: #D1D4D3" ><%=current_user.name%>님 반갑습니다</span></a>
+                    </li>
+                 
+                   <li class="hidden">
+                    </li>
+                    <li>
+                        <a id="11" class="page-scroll" href="/article_board/main_board">전체보기</a>
+                    </li>
+                    <li>
+                        <a id="11" class="page-scroll" href="/article_board/hall_of_fame">명예의전당</a>
+                    </li>
+                            <% if current_user.my_article_id==nil %>
+                             
+                             <li>
+                                <a id="11" class="page-scroll" href="/article_board/write">아이디어제출</a>
+                            </li>
+                            
+                            <% else %>         
+                        
+                            <li>
+                                <a id="11" class="page-scroll" href="/article_board/detailpage/<%=current_user.my_article_id%>">아이디어수정</a>
+                            </li>
+                             <% end %>
+                     
+                    <li>
+                        <a id="11" class="page-scroll" href="/users/sign_out">로그아웃</a>
+                    </li> 
+                    
+                    <% else %>
+                    
+                    <li class="hidden">
+                    </li>
+                    <li>
+                        <a id="11" class="page-scroll" href="/article_board/main_board">전체보기</a>
+                    </li>
+                    <li>
+                        <a id="11" class="page-scroll" href="/article_board/hall_of_fame">명예의전당</a>
+                    </li>
+                    
+                    <li>
+                    <a id="11" class="page-scroll" href="/users/sign_in">로그인</a>
+                    </li>
+                    <% end %>
+                    
+                     
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+    
+    
+    <div style="height: 100px"></div>
+
+  <div class="container" style="    min-height: 500px;">

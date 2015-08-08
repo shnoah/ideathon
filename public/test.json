@@ -1,0 +1,8 @@
+{
+    "title"    :    "test!!!!",
+    "url"    :    "http://rubyinrails.com",
+    "posts"    :    {
+                    "1":"strftime-time-format-in-ruby",
+                      "2":"what-is-gemset"
+                  }
+}

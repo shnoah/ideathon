@@ -1,3 +1,4 @@
+<%= render :partial => "/article_board/navbar" %>
 <h1>비밀번호를 입력해 주세요</h1>
 <form action = "/article_board/article_modify/<%=@this_post.id%>" method ="POST">
     password : <input type = "password" name = "modify_password"><br>

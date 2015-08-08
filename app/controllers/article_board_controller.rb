@@ -1,7 +1,27 @@
 class ArticleBoardController < ApplicationController
   
    before_action :authenticate_user!, only: [:write, :write_process]  
+   
+   
+    @@best_id= 1
+    @@best_num =20
+   
     
+    
+    def json_test
+        
+        path=Rails.root.to_s
+    
+        file = File.read(path+'/public/test.json')
+        @data_hash = JSON.parse(file)
+       
+       
+        
+       
+        
+    end
+    
+   
     def main_board        
         @tags = Tag.all
         @articles = Article.all
@@ -10,9 +30,10 @@ class ArticleBoardController < ApplicationController
             @selected_articles = current_user.articles.where(statuses: {selected: true})
         end
         
-        if params[:id].blank?
-        else
-        @tag_params = Tag.find(params[:id])
+        @tag_id = params[:tag_id].to_i
+        
+        unless @tag_id == 0
+            @tagged_articles = @tags.find(@tag_id).articles
         end
     
     end
@@ -57,6 +78,18 @@ class ArticleBoardController < ApplicationController
         redirect_to "/article_board/detailpage/#{id}"
     end
     
+    def tag_search
+        
+        tag = Tag.find_by_tagging(params[:tag_name])
+        
+        if tag.nil?
+            redirect_to "/article_board/main_board?not_found=true"
+        else
+            redirect_to "/article_board/main_board?tag_id=#{tag.id}"
+        end
+        
+    end
+    
 ################################################################################
 
 #노승호, 이종진 작업 부분 - 노타치
@@ -80,7 +113,8 @@ class ArticleBoardController < ApplicationController
     def write_process
         
             
-            
+            tags = params[:tag].split(/[#,\s]/)
+            tags.delete("")
             
             post = Article.new
     
@@ -95,7 +129,13 @@ class ArticleBoardController < ApplicationController
             post.password = params[:password]
             post.member_name = params[:member_name]
     
-            post.save    
+            post.save
+            
+            #태그 넣는 작업
+            tags.each do |tag_name|
+                new_tag = Tag.find_by_tagging(tag_name)||Tag.create(:tagging => tag_name, :created_at => post.id)
+                post.tags << new_tag
+            end
             
             tmp = User.find(current_user.id)
             
@@ -224,7 +264,7 @@ class ArticleBoardController < ApplicationController
             
             @this_post.destroy
             
-        #   redirect_to '/'       
+            redirect_to '/'       
         else
             @flag = 0      
         end          
@@ -233,15 +273,10 @@ class ArticleBoardController < ApplicationController
     
     ##
     def hall_of_fame
-        @best_id     = ""
-        @best_num    =0
-        
-        @best_id1 =""
-        @best_num1 =0
-        
-        @articles = Article.all.where(:fame => false)
-        
-        
+        @best_id=@@best_id
+        @best_num=@@best_num
+        @articles= Article.all
+    
         ## 해시 사용 버젼
         #candidates = Hash.new
         #@articles.each do |item|
@@ -252,6 +287,53 @@ class ArticleBoardController < ApplicationController
         
         #@real_best = sorted_candidates[-1][0]
     end
+    
+    def hall_of_fame_action
+        
+        @statuses  =Status.all
+        @best_id     =1
+        @best_num    =0
+        @best_id1    =1
+        @best_num1   =0
+        
+        @articles = Article.all.where(:fame => false)
+        
+    #루비문이고 제일 좋아요가 높은 아이템의 아이디를 받아내는 코드입니다#%
+        @articles.each do |x|
+           
+                @best_id1=x.id
+                @best_num1=x.like
+                 if (@best_num.to_i < @best_num1.to_i)
+                     @best_num=@best_num1
+                     @best_id=@best_id1 
+                     end
+        end
+        @@best_id=@best_id
+        @@best_num=@best_num
+       
+     hey = Article.where(:id => @best_id).take
+     hey.fame=true
+     hey.save
+     
+      @articles.each do |x|
+         hey=Article.where(:id =>x.id).take
+         hey.like=0
+         hey.save
+     end
+    
+    @statuses.each do |k|
+        k.liked = false
+        k.save
+    end
+     
+     
+     #각 유저와의 연결도 초기화하는 것을만들어야 함.
+      redirect_to '/article_board/hall_of_fame/'
+            
+     #######################################################################%>    
+        
+    end
+    
     
     
 end

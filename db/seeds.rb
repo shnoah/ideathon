@@ -145,3 +145,30 @@ tag = Tag.find_by_tagging("유철아가지마")||Tag.create(:tagging => "유철�
 Article.find(article_seed5.id).tags << tag
 tag = Tag.find_by_tagging("시드5")||Tag.create(:tagging => "시드5", :created_at => article_seed5.id)
 Article.find(article_seed5.id).tags << tag
+
+
+article_seed5a = Article.new
+
+article_seed5a.title = "타이1234틀"
+article_seed5a.summary = "코딩 교육 1234프로그램555 코딩 교육 프로그램555 코딩 교육 프로그램555 코딩 교육 프로그램555 코딩 교육 프로그램555 코딩 교육 프로그램555 코딩 교육 프로그램555 코딩 교육 프로그램555 코딩 교육 프로그램555 코딩 교육 프로그램555 코딩 교육 프로그램555 "
+article_seed5a.contents = "비전공생을12343 대상으로한 코딩 교육 프로그555램"
+article_seed5a.contact_kakao = "카카오55톡"
+article_seed5a.contact_email = "이123일"
+article_seed5a.demo_link = "google.com555"
+article_seed5a.leader_name = "코드555"
+article_seed5a.password = "1234"
+article_seed5a.like = 5000
+article_seed5a.save
+
+
+member = Member.new
+member.article_id = article_seed5a.id
+member.name = "바보자슥아"
+member.save
+
+
+tag = Tag.find_by_tagging("유철아가지마")||Tag.create(:tagging => "유철아가지마", :created_at => article_seed5a.id)
+Article.find(article_seed5a.id).tags << tag
+tag = Tag.find_by_tagging("시드5")||Tag.create(:tagging => "시드5", :created_at => article_seed5a.id)
+Article.find(article_seed5a.id).tags << tag
+

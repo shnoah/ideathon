@@ -1,34 +1,30 @@
-
+<%= render :partial => "/article_board/navbar" %>
 <div class = "container-fluid">
     <div class= "row">
         <div class = "col-sm-12 col-md-4 col-md-offset-4" style= "text-align:center">
-            <h1>명예의 전당</h1>
+           <br><br><br><br><br> <h1>명예의 전당</h1>
         </div>
     </div>
+
+    <%if current_user.nil?%>
+    <%else%>
+        <%if current_user.email=="ohs2033@korea.ac.kr"%>
+         <form action = "/article_board/hall_of_fame_action">
+         <input type = "submit" value = "리셋하기!">
+         </form>
+         <%end%>
+    <%end%>
+     
+     
     
-    <%#루비문이고 제일 좋아요가 높은 아이템의 아이디를 받아내는 코드입니다#%>
-     <%@articles.each do |x|%>
-             <%if x.fame ==false%>
-                 <%@best_num1=0%>
-                 <%@best_id1=x.id%>
-                 <%@best_num1=x.like%>
-                     <%if @best_num<@best_num1%>
-                     <%@best_num=@best_num1%>
-                     <%@best_id=@best_id1%>
-                     <%end%>
-             <%end%>
-            
-      <%end%>
-            <br>
-            
-     <%#######################################################################%>
-       
-<div class = "row">
+  
+    <%unless @best_id.nil?%>
+    <div class = "row">
     <div class="jumbotron">
         <div class = "container-fluid">
             <div class = "col-xs-12 col-md-6 col-md-offset-3" style = "text-align:center">
                 <h3>
-                오늘의 BEST IDEA는 바로 <span style ="color:red"><%=@articles.find(@best_id).title%>"</span>입니다.</h3> <h4><br> 좋아요 개수는 <span style ="color:red"><%=@best_num%>개 </span>입니다.
+                오늘의 BEST IDEA는 바로 "<span style ="color:red"><%=@articles.find(@best_id).title%>"</span>입니다.</h3> <h4><br> 좋아요 개수는 <span style ="color:red"><%=@best_num%>개 </span>입니다.
                 </h4>
             </div>
         </div>
@@ -38,9 +34,7 @@
 </div>
 
 
-
-
-
+<%#########최고의 아이템으로 선정된 거 전시 공간##########%>
 
 <!-- 수정완료 -->
 
@@ -122,11 +116,11 @@
                  <p><strong><%= r.writer %></strong> : <%= r.contents %></p>
        
        <!-- 유저 확인 후 수정/삭제 버튼 출력 -->          
-        <% if  user_signed_in? && r.writer == current_user.name && r.writer_email == current_user.email%>
+            <% if  user_signed_in? && r.writer == current_user.name && r.writer_email == current_user.email%>
                 <a href= "/article_board/modify_reply/<%=r.id %>" class="btn btn-primary active" role="button">수정</a>
                 <a href = "/article_board/delete_reply/<%= r.id %>" class="btn btn-primary active" role="button">삭제</a>
-        <% else %>
-        <% end %>
+            <% else %>
+            <% end %>
        
             </div>
         <% end %>
@@ -145,7 +139,7 @@
         </center>
     </div>
     <div class="col-md-4"></div>
+
 </div>
 
-
- 
+<%end%>

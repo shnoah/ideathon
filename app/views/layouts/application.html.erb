@@ -1,24 +1,20 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Workspace</title>
+  <title>멋사아이디어톤 공식홈페이지</title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'imagesloaded.pkgd.min.js'=> true %>
   
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
+  
   
   <%= csrf_meta_tags %>
-    <meta charset="UTF-8">
-    
-      <title>멋사해커톤 공식홈페이지</title>
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
- 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
-  <link rel="icon"type="image/png" href="/image/pavicon.png" />
-  
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/ico" href="/image/pavicon.ico"/>
   <!-- 디자인 추가 -->
   <!-- Latest compiled and minified CSS -->
+  
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
   <!-- Optional theme -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
@@ -32,25 +28,6 @@
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
   <![endif]-->
   <!-- 디자인 추가 -->  
-    
-    
-    <script src="/javascripts/imagesloaded.pkgd.min.js"></script>
-        
-      
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
-    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css"/>-->
-    <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <link rel="icon" type="image/ico" href="media/favicon.ico"/>
-    <link rel="stylesheet" href="css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/styles.1.9.css"/>
-    <link rel="stylesheet" href="css/prism.css"/>
-
-    <meta property="description" content="Beautiful, free videos for your homepage background"/>
-
-    <meta property="og:title" content="Coverr - Beautiful, free videos for your homepage"/>
-    <meta property="og:url" content="http://www.coverr.co"/>
-    <meta property="og:description" content="Beautiful, free videos for your homepage background"/>
     <meta property="og:image" content="http://www.coverr.co/media/cover-meta.png"/>
     <meta name="google-site-verification" content="PUIw6OhsS-xx6WGCH6u_H8ISVMLVvj7VTgvFNXF-KqA" />
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -61,53 +38,31 @@
     @media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
         .ig-b-v-24 { background-image: url(//badges.instagram.com/static/images/ig-badge-view-sprite-24@2x.png); background-size: 160px 178px; } }
     </style>
-
     <script src="/javascripts/imagesloaded.pkgd.min.js"></script>
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-
-<!-- Optional theme -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    
+    <script src="/javascripts/imagesloaded.pkgd.min.js"></script>
+        
+    
+      
 </head>
-<body style="padding-top: 11em"> <!-- 임시 navbar 위한 여백 -->
 
 
-<!-- 임시 navbar-->
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container">
-    <p class="navbar-text navbar-left"><a href="https://h22-woodykim-1.c9.io/" class="navbar-link"><span class="glyphicon glyphicon-home" aria-hidden="true"></span>홈으로</a></p>
-    <p class="navbar-text navbar-right"><a href="/article_board/main_board" class="navbar-link">아이디어 보기</a></p>
-    <p class="navbar-text navbar-left"><a href="/article_board/hall_of_fame" class="navbar-link">명예의 전당</a></p>
-<% if user_signed_in? %>
+
+<body id="<%= params[:controller].parameterize %>_controller" id="page-top" data-spy="scroll" data-target=".navbar-fixed-top" class="back_all"> <!-- 임시 navbar 위한 여백 -->
 
 
-     <p class="navbar-text navbar-right"><a class="navbar-link" href="/users/sign_out">로그아웃</a></p>
 
-    <% if current_user.my_article_id==nil%>
-
-      <p class="navbar-text navbar-right"><a href="/article_board/write" class="navbar-link">아이디어 쓰기</a></p>
-
-    <% else %>
-
-       <p class="navbar-text navbar-right"><a class="navbar-link" href="/article_board/detailpage/<%=current_user.my_article_id%>">내가 쓴 아이디어 보기</a></p>
-
-    <% end %>
-  
-   <p class="navbar-text navbar-right"><strong><%=current_user.name%></strong>님 환영합니다. </a></p>  
-
-   <% else %>
-
-      <p class="navbar-text navbar-right"> <a class="navbar-link"  href="/users/sign_in">로그인</a></p>
-      <p class="navbar-text navbar-right"> <a class="navbar-link"  href="/users/sign_up">회원가입</a></p>
-
-    <% end %>
-  </div>
-</nav>
 
 <%= yield %>
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
+  ga('create', 'UA-66096049-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
 </body>
 </html>

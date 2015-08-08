@@ -73,6 +73,7 @@ a:focus {
     text-transform: uppercase;
     font-family: Montserrat,"Helvetica Neue",Helvetica,Arial,sans-serif;
     background-color: red;
+    padding-top: 0px;
 }
 
 .navbar-custom .navbar-brand {
@@ -339,16 +340,17 @@ a:focus {
 }
 
 .btn-default {
-    border: 1px solid #42dca3;
-    color: #42dca3;
+    border: 1px solid gray;
+    color: #f09130;
+    font-weight: 800;
     background-color: transparent;
 }
 
 .btn-default:hover,
 .btn-default:focus {
-    border: 1px solid #42dca3;
+    color: #f09130;
+    font-weight: 800;
     outline: 0;
-    color: #454545;
     background-color: #42dca3;
 }
 
