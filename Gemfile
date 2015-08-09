@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+gem 'execjs' 
+gem 'therubyracer' 
+# AWS 업로드 시 사용하기 위함
 
 gem 'mini_magick'
 gem 'carrierwave'

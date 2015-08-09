@@ -11,23 +11,24 @@
          
        
                  
-           제목: <span style="color: #f99636; font-size: 20px; font-weight: 900; "> <%= @this_article.free_title %> </span><br>
+           제목: <span style="color: #f99636; font-size: 1.5em; font-weight: 900; "> <%= @this_article.free_title %> </span><br>
            
          </div>
          <div class= "col-md-3 col-xs-12"> 작성자 : <%=@this_article.free_writer%>
         </div>
            <br><br><br><br>
-         
-              <div class="inner-wrap">
+            <div style = "margin:10px">
+              <div class="inner-wrap" style = "width:80%;margin:auto" >
                   <label style="word-break:break-all">
                   <div style="color:black"><%= @this_article.free_article %></div></label>
                   
-              
+              </div>
+              </div>
             <div class="hidden-xs">
               <div class="row">
                   <div style="text-align: center" >
                       
-              <div class="col-xs-12" style ="font-size:1em">
+              <div class="col-md-11" style ="font-size:1em;margin:10px">
                   <center>
                       <div style ="float:right">
                       <form action = "/article_board/freeboard_delete">
@@ -46,7 +47,7 @@
                       
                       <div style ="float:right">
                       <form action ="/article_board/freeboard">
-                            <input type="submit" value="돌아가기">                 
+                            <input type="submit" value="목록">                 
                         
                       </form>
                       </div>
@@ -63,7 +64,7 @@
               
               
               
-          </div>
+          
      </div>
     </div>
     
@@ -71,7 +72,7 @@
     
     
     
-<div class="visible-xs-*">
+<div class="visible-xs">
      <div class="container=fluid">
          <center>
          <div class = "col-xs-10 col-xs-offset-1">

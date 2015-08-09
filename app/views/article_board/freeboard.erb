@@ -20,22 +20,19 @@
  
  <%@fr.each do |x|%>
          <div class="form-style-10">
-             <div class="row">
-               <div class ="col-xs-12">
-           제목:&nbsp;&nbsp;&nbsp;<strong><span style = "font-size:1.6em"><a href = "/article_board/freeboard_detail/<%=x.id%>"><%=x.free_title%></a></span></strong>
+             <div class="row" style="padding:10px;margin:3px">
+               <div class ="col-xs-12 col-md-10">
+            제목:&nbsp;&nbsp;&nbsp;<strong><span style = "font-size:100%"><a href = "/article_board/freeboard_detail/<%=x.id%>"><%=x.free_title%></a></span></strong>
                  </div>
                  
                  
-               <div class ="col-xs-12">
-                 <div style = "float:right">
-           작성자 :<%=x.free_writer%></div><br><div style ="float:right">
-           <a href="/article_board/freeboard_modify/<%=x.id%>">수정하기</a> &nbsp;
-           <a href = "/article_board/freeboard_delete/<%=x.id%>">삭제하기</a>
-                
-               </div> 
-               
-               
-               
+               <div class ="col-xs-12 col-md-2">
+                     <div style = "float:right">
+                       작성자 :<%=x.free_writer%></div><br>
+                       <div style ="float:right">
+                           <a href="/article_board/freeboard_modify/<%=x.id%>">수정하기</a> &nbsp;
+                           <a href = "/article_board/freeboard_delete/<%=x.id%>">삭제하기</a>                           
+                       </div>                
                </div>
             </div>
           </div>

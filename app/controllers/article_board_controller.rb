@@ -241,7 +241,6 @@ class ArticleBoardController < ApplicationController
 #글 수정    
     def article_modify    
         
-        
         @flag=0
         @this_post = Article.find(params[:id]) 
         
@@ -258,7 +257,6 @@ class ArticleBoardController < ApplicationController
     
     def article_delete       
 
-        
         @flag=0
         @this_post = Article.find(params[:id]) 
         
@@ -400,7 +398,27 @@ class ArticleBoardController < ApplicationController
 
     end
     
-    def test
+    def re_reply_write
+        
+        new_reply = ReReply.new
+        new_reply.reply_id = params[:reply_id]
+        
+        new_reply.writer = current_user.name
+        new_reply.writer_email = current_user.email
+        new_reply.contents = params[:contents]
+        new_reply.save
+        
+        redirect_to :back
+        
+    end
+    
+    def re_reply_delete
+        
+        deleted_re_reply = ReReply.find(params[:id].to_i)
+        deleted_re_reply.destroy
+        
+        redirect_to :back
+        
     end
 end
 ################################################################################
