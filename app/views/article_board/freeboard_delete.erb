@@ -1,0 +1,9 @@
+<%= render :partial => "/article_board/navbar" %>
+
+<h1>비밀번호를 입력해 주세요</h1>
+<form action = "/article_board/freeboard_delete_process/<%=@this_post.id%>" method ="POST">
+    password : <input type = "password" name = "delete_password"><br>
+    <input type = "submit" value = "확인">
+</form>
+<a href = "/article_board/freeboard_detail/<%=@this_post.id%>">돌아가기</a>
+

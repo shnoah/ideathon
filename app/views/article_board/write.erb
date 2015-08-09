@@ -25,32 +25,32 @@
         </div>
      
      <div class="col-md-8 col-md-offset-2 col-sm-12 co-xs-12">
-     <div class="form-style-10">
+     <div class="form-style-10" style="padding: 45px 0px 45px 0px;">
           <form action="/article_board/write_process" method="POST" enctype="multipart/form-data" name="write_form" onsubmit="return overTag()">
             <input type="hidden" value="<%=current_user.email%>" name="posting_check_email">
-              <div class="section"> 서비스소개</div>
+              <div class="section" style="padding-left: 40px"> 서비스소개</div>
               <div class="inner-wrap">
                   <label><span style="margin-bottom: 10px; font-weight: 900;">서비스명(필수)</span> <input type="text" name="title" placeholder="&nbsp;서비스명을 입력해주세요." required/></label>
                   <label><span style="margin-bottom: 10px; font-weight: 900;">한줄설명(필수)</span> <input type="text" maxlength="20" name="summary" placeholder="&nbsp;서비스를 한문장으로 요약해주세요.(20자)" required /></label>
-                  <label><span style="margin-bottom: 10px; font-weight: 900;">상세설명(필수)</span> <textarea rows="3" name="contents" placeholder="&nbsp;서비스에 대해 자유롭게 설명해주세요." required></textarea></label>
-                  <label><span style="margin-bottom: 10px; font-weight: 900;">태그(필수)</span> <input type="text" name="tag" placeholder="&nbsp;#맞팔#소통 금지 (미구현) (256Bytes)" required></input></label>
-                  <label><span style="margin-bottom: 10px; font-weight: 900;">데모링크</span> <input type="text" name="demo_link" value="http://" placeholder="&nbsp;데모 링크를 걸어주세요. (http://는 제외하고 주소만 입력해주세요.)" /></label>      
-                  <label><span style="margin-bottom: 10px; font-weight: 900;">이미지첨부</span> <div id="test"> <input type=file name="image_file"> </div>
+                  <label><span style="margin-bottom: 10px; font-weight: 900;">상세설명(필수)</span> <textarea rows="3" style="color: #66696B;" name="contents" placeholder="&nbsp;서비스에 대해 자유롭게 설명해주세요." required></textarea></label>
+                  <label><span style="margin-bottom: 10px; font-weight: 900;">태그(필수/최대 3개)</span> <input type="text" name="tag" placeholder="&nbsp;예시) #O2O #SNS #음식 " required></input></label>
+                  <label><span style="margin-bottom: 10px; font-weight: 900;">데모링크</span> <input type="text" style="color: #66696B;" name="demo_link" value="http://" /></label>      
+                  <label><span style="margin-bottom: 10px; font-weight: 900;">이미지첨부</span> <div id="test" style="padding: 5px 10px 5px 10px;" > <input type=file name="image_file"> </div>
               </div>
           
-              <div class="section"> 팀/자기소개</div>
+              <div class="section" style="padding-left: 40px"> 팀/자기소개</div>
               <div class="inner-wrap">
                   <label><span style="margin-bottom: 10px; font-weight: 900;">팀대표자</span><input type="text" name="leader_name" placeholder="&nbsp;학교명/이름으로 입력해주세요." /></label>
                   <label><span style="margin-bottom: 10px; font-weight: 900;">팀구성원</span> <input type="text" name="member_name" placeholder="&nbsp;학교명/이름으로 입력해주세요." /></label>
               </div>
           
-              <div class="section"> 연락처</div>
+              <div class="section" style="padding-left: 40px"> 연락처</div>
                   <div class="inner-wrap">
                   <label><span style="margin-bottom: 10px; font-weight: 900;">카카오톡</span><input type="text" name="contact_kakao" placeholder="&nbsp;카카오톡 아이디를 입력해주세요."/></label>
                   <label><span style="margin-bottom: 10px; font-weight: 900;">이메일</span> <input type="email" name="contact_email" placeholder="&nbsp;이메일 주소를 입려해주세요." /></label>
               </div>
               
-              <div class="section"> 비밀번호</div>
+              <div class="section" style="padding-left: 40px"> 비밀번호</div>
                   <div class="inner-wrap">
                   <label><span style="margin-bottom: 10px; font-weight: 900;">비밀번호</span><input type="password" name="password" placeholder="&nbsp;수정시 필요한 비밀번호입니다." required/></label>
               </div>

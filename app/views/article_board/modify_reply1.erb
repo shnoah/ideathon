@@ -1,0 +1,25 @@
+<!-- 수정완료 -->
+
+<%= render :partial => "/article_board/navbar" %>
+
+     <div class="col-md-8 col-md-offset-2 col-sm-12 co-xs-12">
+     <div class="form-style-10" style="padding: 45px 0px 45px 0px;">
+          <form action="/article_board/update_reply/<%=@this_post.id%>" method="POST">
+              <div class="section" style="padding-left: 40px"> 댓글수정</div>
+              <div class="inner-wrap">
+                     <input type="text" class="form-control" name="new_reply" value="<%=@this_post.contents%>">
+             </div>
+             <div style="text-align: center;">
+                   <a class="button-section"  href="https://hackathon-woodykim-1.c9.io/article_board/detailpage/<%=@this_post.id%>">
+                    <input type="button" value="돌아가기">                 
+                   </a>
+                    <input class="button-section" type="submit" name="Sign Up" value="수정하기"/>
+              </div>
+          </form>
+        </div>
+        </div>
+          
+          
+              </div>
+<%= render :partial => "/article_board/bottom" %>
+

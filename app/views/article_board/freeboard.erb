@@ -4,18 +4,46 @@
       <span style="font-weight: 800; color:#727272; font-size: 120%;">자유게시판|</span> 
       <span style="font-weight: 500; color:#b2b2b2; font-size: 120%;">&nbsp;등록된 모든 자유롭게 게시글을 올리고 볼 수 있습니다.</span>
     </div>
-  </div>
+  </div><br>
   
  <% if user_signed_in? %>
- <div class ="button"><a href = "/article_board/freeboard_write">글 작성하기</a><br>
  
+ <div style = "text-align:center">
+ <button type = "button"class="btn btn-default" aria-label="Left Align"><a href = "/article_board/freeboard_write">글 작성하기</a></button>
+ </div>
+ 
+ <% else%>
+ <br><br><br><br>
+ <div style = "text-align:center">
  </div>
  <%end%>
+ 
  <%@fr.each do |x|%>
-         
-         <a href = "/article_board/freeboard_detail/<%=x.id%>">제목:<%=x.free_title%></a> / 작성자 :<%=x.free_writer%><a href="article_board/freeboard_modify/<%=x.id%>">수정하기</a><a>삭제하기</a><br>
+         <div class="form-style-10">
+             <div class="row">
+               <div class ="col-xs-12">
+           제목:&nbsp;&nbsp;&nbsp;<strong><span style = "font-size:1.6em"><a href = "/article_board/freeboard_detail/<%=x.id%>"><%=x.free_title%></a></span></strong>
+                 </div>
+                 
+                 
+               <div class ="col-xs-12">
+                 <div style = "float:right">
+           작성자 :<%=x.free_writer%></div><br><div style ="float:right">
+           <a href="/article_board/freeboard_modify/<%=x.id%>">수정하기</a> &nbsp;
+           <a href = "/article_board/freeboard_delete/<%=x.id%>">삭제하기</a>
+                
+               </div> 
+               
+               
+               
+               </div>
+            </div>
+          </div>
+      
         <%end%>
+          </div>
         
         
         
+            
             

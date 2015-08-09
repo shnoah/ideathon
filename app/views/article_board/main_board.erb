@@ -25,7 +25,7 @@
   <div class="tab-content">
   
     <!-- RANDOM TAB -->
-  <% if @tag_id == 0 && params[:not_found].nil? %>  
+  <% if @tag_id == 0 && params[:not_found].nil? || !params[:page].nil? %> 
     <div role="tabpanel" class="tab-pane fade in active" id="random">
   <% else %>
     <div role="tabpanel" class="tab-pane fade" id="random">
@@ -35,7 +35,11 @@
     <div style="padding: 27px 0px 30px 0px;">
       <span style="font-weight: 800; color:#727272; font-size: 120%;">랜덤보기 |</span> 
       <span style="font-weight: 500; color:#b2b2b2; font-size: 120%;">&nbsp;등록된 모든 아이디어들을 랜덤으로 볼 수 있습니다</span>
+      <div>
+      <%#=paginate @articles%>
+      </div>
     </div>
+    
   </div>
   
       <div class="row">
@@ -50,15 +54,22 @@
                 <% end %>
                 <div class="caption" style="padding-bottom: 0px;">
                   <h4 style="font-weight: 800; color:#EB8E34;letter-spacing: 0px;"><%= item.title %></h4>
-                  <h5 style="word-spacing: -2px; font-weight: 700; letter-spacing: 0px; color: #717171;" ><%= item.summary.first(20) %></h5>
+                  <div style="width:100%;height:20px">
+                  <h5 style="word-spacing: -2px; font-weight: 700; letter-spacing: 0px; color: #717171;font-size:100%" ><%= item.summary.first(20) %></h5>
+                  </div>
                   <div style="margin-top: 1px solid white;"></div>
                   <div style="font-weight: 700; color: #8E8E8E; margin-bottom: 1px solid black;">   <!--팀장명 오른쪽 정렬 처리-->
                    <hr style="margin: 10px 0px 10px 0px;"><%= item.leader_name %>팀  <br>
+                     
+                     <div style="width:100%;height:20px" >
                      <% item.tags.each do |tag| %>
-                     <span style="background-color:#EFEFEF; margin-right: 5px;">
+                     
+                     <span style="background-color:#EFEFEF; margin-right: 5px;font-size:100%">
                       #<%= tag.tagging.first(5)%>
                     </span>
+                    
                       <%end%>
+                      </div>
                    </div>
                   <div> <!--이 div가 .caption의 아래쪽 정렬 필요-->
                   <hr style="margin: 13px 0px 13px 0px;">
@@ -79,7 +90,7 @@
 
  
     <!-- TAG TAB -->
-  <% if @tag_id == 0 && params[:not_found].nil? %>
+  <% if @tag_id == 0 && params[:not_found].nil? || !params[:page].nil?  %>
     <div role="tabpanel" class="tab-pane fade" id="tag">
   <% else %>
     <div role="tabpanel" class="tab-pane fade in active" id="tag">
@@ -151,15 +162,19 @@
                 <% end %>
                 <div class="caption" style="padding-bottom: 0px;">
                   <h4 style="font-weight: 800; color:#EB8E34;letter-spacing: 0px;"><%= item.title %></h4>
+                  <div style="width:100%;height:20px">
                   <h5 style="word-spacing: -2px; font-weight: 700; letter-spacing: 0px; color: #717171;" ><%= item.summary.first(20) %></h5>
+                  </div>
                   <div style="margin-top: 1px solid white;"></div>
                   <div style="font-weight: 700; color: #8E8E8E; margin-bottom: 1px solid black;">   <!--팀장명 오른쪽 정렬 처리-->
                    <hr style="margin: 10px 0px 10px 0px;"><%= item.leader_name %>팀  <br>
-                     <% item.tags.each do |tag| %>
-                     <span style="background-color:#EFEFEF; margin-right: 5px;">
-                      #<%= tag.tagging.first(5)%>
-                    </span>
-                      <%end%>
+                     <div style="width:100%;height:20px">
+                       <% item.tags.each do |tag| %>
+                       <span style="background-color:#EFEFEF; margin-right: 5px;font-size:100%">
+                        #<%= tag.tagging.first(5)%>
+                       </span>
+                        <%end%>
+                     </div>
                    </div>
                   <div> <!--이 div가 .caption의 아래쪽 정렬 필요-->
                   <hr style="margin: 13px 0px 13px 0px;">
@@ -203,37 +218,41 @@
         </div>
         <div class="row">
           <% @selected_articles.each do |item| %>
-           <div class="col-md-3 col-md-offset-0 col-sm-6 col-xs-10 col-xs-offset-1">
-            <a href="/article_board/detailpage/<%=item.id%>">
-              <div class="thumbnail">
-                <%if item.my_image.url==nil %>
-                  <img style="border-radius: 20px; width: 100%;" src="/image/sample.png" />
-                <% else %> 
-                  <img style="border-radius: 20px; " src="<%=item.my_image.url(:thumb)%>"/>    
-                <% end %>
-                <div class="caption" style="padding-bottom: 0px;">
-                  <h4 style="font-weight: 800; color:#EB8E34;letter-spacing: 0px;"><%= item.title %></h4>
-                  <h5 style="word-spacing: -2px; font-weight: 700; letter-spacing: 0px; color: #717171;" ><%= item.summary.first(20) %></h5>
-                  <div style="margin-top: 1px solid white;"></div>
-                  <div style="font-weight: 700; color: #8E8E8E; margin-bottom: 1px solid black;">   <!--팀장명 오른쪽 정렬 처리-->
-                   <hr style="margin: 10px 0px 10px 0px;"><%= item.leader_name %>팀  <br>
-                     <% item.tags.each do |tag| %>
-                     <span style="background-color:#EFEFEF; margin-right: 5px;">
-                      #<%= tag.tagging.first(5)%>
-                    </span>
-                      <%end%>
-                   </div>
-                  <div> <!--이 div가 .caption의 아래쪽 정렬 필요-->
-                  <hr style="margin: 13px 0px 13px 0px;">
-                    <div align="center">
-                      <img style="width: 11%; padding-bottom: 5px;" src="/image/like.png">
-                      &nbsp;<span style="font-size: 15px; padding-top: 10px; font-weight: 800; color:#EB8E34;"><%= item.like %></span>
+             <div class="col-md-3 col-md-offset-0 col-sm-6 col-xs-10 col-xs-offset-1">
+              <a href="/article_board/detailpage/<%=item.id%>">
+                <div class="thumbnail">
+                  <%if item.my_image.url==nil %>
+                    <img style="border-radius: 20px; width: 100%;" src="/image/sample.png" />
+                  <% else %> 
+                    <img style="border-radius: 20px; " src="<%=item.my_image.url(:thumb)%>"/>    
+                  <% end %>
+                  <div class="caption" style="padding-bottom: 0px;">
+                    <h4 style="font-weight: 800; color:#EB8E34;letter-spacing: 0px;"><%= item.title %></h4>
+                    <div style="width:100%;height:20px">
+                    <h5 style="word-spacing: -2px; font-weight: 700; letter-spacing: 0px; color: #717171;" ><%= item.summary.first(20) %></h5>
+                    </div>
+                    <div style="margin-top: 1px solid white;"></div>
+                    <div style="font-weight: 700; color: #8E8E8E; margin-bottom: 1px solid black;">   <!--팀장명 오른쪽 정렬 처리-->
+                     <hr style="margin: 10px 0px 10px 0px;"><%= item.leader_name %>팀  <br>
+                       <div style="width:100%;height:20px">
+                         <% item.tags.each do |tag| %>
+                         <span style="background-color:#EFEFEF; margin-right: 5px;font-size:100%">
+                          #<%= tag.tagging.first(5)%>
+                         </span>
+                          <%end%>
+                      </div>
+                     </div>
+                    <div> <!--이 div가 .caption의 아래쪽 정렬 필요-->
+                    <hr style="margin: 13px 0px 13px 0px;">
+                      <div align="center">
+                        <img style="width: 11%; padding-bottom: 5px;" src="/image/like.png">
+                        &nbsp;<span style="font-size: 15px; padding-top: 10px; font-weight: 800; color:#EB8E34;"><%= item.like %></span>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </a>
-          </div>
+              </a>
+            </div>
         <% end %>
         </div>
       </div>

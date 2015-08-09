@@ -1,19 +1,39 @@
 <!-- 수정완료 -->
 <%= render :partial => "/article_board/navbar" %>
       
-       <div class="col-md-12" style="height:auto;; text-align:center; border-top: 1px solid #b7b7b7; border-bottom: 1px solid #b7b7b7; background-color: #e5e5e5; margin:0px 0px 0px 0px;"> 
-        <div style="padding: 27px 0px 30px 0px;">
+    <div class="row">
+    <a href="/article_board/main_board/#random" >
+      <div class="col-md-4 col-sm-4 col-xs-4 " style="padding-right: 10px; padding-left:10px;">
+        <div id="option_nav"><span style="font-weight: 900;">?</span> 랜덤보기</div>
+      </div>
+    </a>
+    
+    <a href="/article_board/main_board/#tag" >
+     <div class="col-md-4 col-sm-4 col-xs-4 " style="padding: 0px 10px 0px 10px;">
+       <div id="option_nav"><span style="font-weight: 900;">#</span> 태그검색</div>
+     </div>
+    </a>
+    
+    <a href="/article_board/main_board/#likes">
+      <div class="col-md-4 col-sm-4 col-xs-4 "style="padding-right: 10px; padding-left:10px;">
+        <div id="option_nav"><span style="font-weight: 900;">⌘</span> 투표후보</div>
+      </div>
+    </a>
+  </div>
+  
+  <div class="col-md-12" style="height:auto;; text-align:center; border-top: 1px solid #b7b7b7; border-bottom: 1px solid #b7b7b7; background-color: #e5e5e5; margin:30px 0px 0px 0px;"> 
+    <div style="padding: 27px 0px 30px 0px;">
           <span style="font-weight: 800; color:#727272; font-size: 120%;"><%= @this_post.title %> |</span> 
           <span style="font-weight: 500;color:#b2b2b2; font-size: 120%;">&nbsp;아이디어 상세페이지입니다</span>
         </div>
         </div>
         
         
-     <div class="col-md-8 col-md-offset-2 col-sm-12 co-xs-12">
-     <div class="form-style-10">
+     <div class="col-md-8 col-md-offset-2 col-sm-12 co-xs-12" style="height: auto;">
+     <div class="form-style-10" style="padding-top: 50px;">
        
-       <div class="row" style="text-align: center;">
-         <div class="col-md-4 col-md-offset-4">
+       <div class="row" style="text-align: center; padding:0px;">
+         <div class="col-md-4 col-md-offset-4 col-xs-8 col-xs-offset-2 col-sm-offset-2 col-sm-8" style="padding:0px;">
          
             <%if @this_post.my_image.url==nil %>
               <img style="border-radius: 20px; width: 100%; margin-bottom:10px;" src="/image/sample.png" />
@@ -23,162 +43,171 @@
                  
            <span style="color: #f99636; font-size: 25px; font-weight: 900; "> <%= @this_post.title %> </span><br>
            <span style="color: #717171; font-size: 15px; font-weight: 700;"><%= @this_post.summary.first(20) %></span>
+         
+         
+          <% if @this_post.demo_link == nil || @this_post.demo_link == "" %>
+            <!-- demo_link가 없으면 표시하지 않음 -->
+          <% else %>
+            <a href="http://<%= @this_post.demo_link %>" target="_blank">
+            <span style="color: #717171; font-size: 13px; font-weight: 500;"><br><%= @this_post.demo_link %></span></a>
+          <%end %>
+           
+      
+           
            
          </div>
        </div>
            
          
           <form style="margin-top: 50px">
-              <div class="inner-wrap">
-                  <label style="word-break:break-all"><span style="margin-bottom: 10px; font-weight: 900;">상세설명</span> <textarea rows="3" name="contents" value="&nbsp;<%= @this_post.contents %>" required></textarea></label>
-                  <label><span style="margin-bottom: 10px; font-weight: 900;">태그</span> <input type="text" name="tag" value="&nbsp;#맞팔#소통 금지 (미구현) (256Bytes)" required></input></label>
-                  <label><span style="margin-bottom: 10px; font-weight: 900;">데모링크</span> <input type="text" name="demo_link" value="http://" value="&nbsp;데모 링크를 걸어주세요. (http://는 제외하고 주소만 입력해주세요.)" /></label>      
-                  <label><span style="margin-bottom: 10px; font-weight: 900;">이미지첨부</span> <div id="test"> <input type=file name="image_file"> </div>
-              </div>
           
-              <div class="inner-wrap">
-                  <label><span style="margin-bottom: 10px; font-weight: 900;">팀대표자</span><input type="text" name="leader_name" value="&nbsp;학교명/이름으로 입력해주세요." /></label>
-                  <label><span style="margin-bottom: 10px; font-weight: 900;">팀구성원</span> <input type="text" name="member_name" value="&nbsp;학교명/이름으로 입력해주세요." /></label>
-              </div>
-          
-                  <div class="inner-wrap">
-                  <label><span style="margin-bottom: 10px; font-weight: 900;">카카오톡</span><input type="text" name="contact_kakao" value="&nbsp;카카오톡 아이디를 입력해주세요."/></label>
-                  <label><span style="margin-bottom: 10px; font-weight: 900;">이메일</span> <input type="email" name="contact_email" value="&nbsp;이메일 주소를 입려해주세요." /></label>
-              </div>
+            <!--  <div style="text-align: right;color: #cecece; font-size: 13px; font-weight: 500; padding-bottom: 10px; "><%= @this_post.updated_at.in_time_zone("Seoul").strftime("%Y/%m/%d %I:%M:%S%p")%></div>  -->
               
+              <div class="inner-wrap">
+              
+                  <label style="word-break:break-all"><span style="margin-bottom: 10px; font-weight: 900;">상세설명</span> 
+                  <div id="test"><div><%= @this_post.contents %></div></div></label>
+                  
+                  <label><span style="margin-bottom: 10px; font-weight: 900;">팀멤버</span> 
+                  <div id="test2"><div><strong><%= @this_post.leader_name%></strong><%= @this_post.member_name%></div></div></label>
+                  
+                  <label><span style="margin-bottom: 10px; font-weight: 900;">이메일</span> 
+                  <div id="test2"><div><%= @this_post.contact_email%></div></div></label>
+                  
+                  <label><span style="margin-bottom: 10px; font-weight: 900;">카카오톡</span> 
+                  <div id="test2"><div><%= @this_post.contact_kakao%></div></div></label>
+                  
+        
+             
             
-              
-              <div style="text-align: center;">
-                   <a class="button-section"  href="/">
-                    <input type="button" value="돌아가기">                 
-                   </a>
-              </div>
           </form>
           </div>
-     </div>
-     
-     
-     
-        
-        
-        
+          
+          <div style="text-align: center; margin-top: 40px;">
+          <%if user_signed_in?%>
+              
+            <!-- 좋아요 버튼3 -->
+            <% if current_user.articles.where(statuses: {liked: true}).include? @this_post %>
 
+                    
+              <a href="/article_board/like_delete/<%= @this_post.id %>" type="submit"> 
+              <img  style="width:30px; padding-bottom: 10px;" src="/image/like.png">
+              &nbsp;<span style="font-weight: 800;">취소<%= @this_post.like %></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+            
+            
+            <% else %>
+              <a href="/article_board/like_process/<%= @this_post.id %>" type="submit">
+               <img style="width: 30px; padding-bottom: 10px;" src="/image/like.png">
+               &nbsp;<span style="font-weight: 800;"> 좋아요 <%= @this_post.like %></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <% end %>
+            <% if current_user.articles.where(statuses: {selected: true}).include? @this_post %>
+              <a href="/article_board/select_delete/<%= @this_post.id %>" type="submit">
+               <img style="width: 30px; padding-bottom: 10px;" src="/image/like.png">
+               &nbsp;<span style="font-weight: 800;"> 후보제외 </span></a>
+            <% end %>
+          
+           <%else %>
+              <!-- 좋아요 버튼 -->
+               <img style="width: 30px; padding-bottom: 10px;" src="/image/like.png">
+               &nbsp;<span style="font-weight: 800; color:#F89F49;"> <%= @this_post.like %> (로그인 후 이용)
+          <% end %>
+          </div>
+
+        <%if user_signed_in?%>
+            <div style="text-align: center; margin: 30px 0px 30px 0px;">
+              
+                   <a class="button-section"  href="/article_board/pw_chk_process_m/<%= @this_post.id%>">
+                    <input type="button" value="수정">                 
+                   </a>
+                   <a class="button-section"  href="/article_board/pw_chk_process_d/<%= @this_post.id%>">
+                    <input type="button" value="삭제">                 
+                   </a>
+                  <a class="button-section"  href="/article_board/main_board">
+                    <input type="button" value="목록">                 
+                   </a>
+
+              </div>
+       <% else %>
+          <div style="text-align: center; margin: 30px 0px 30px 0px;">
+               <a class="button-section"  href="/article_board/main_board">
+                   <input type="button" value="목록">                 
+               </a>
+              </div>
+       
+        <% end %> 
+              
+              
+              
+          <div class="inner-wrap" style="height: auto; padding-bottom: 70px;">       
+            
+            
+              <label style="margin:0px;"><span style="margin-bottom: 0px; font-weight: 900;">댓글</span> 
+              <div id="test3" style="padding:14px; margin:0px;">
+                 <%if user_signed_in?%>       
+                     <% @this_post.replies.each do |r| %>
+                        <% if @this_post.replies.nil? %>
+                         등록된 댓글이 없습니다
+                        <% else %> 
+                             <%= r.writer %> : <%= r.contents %> &nbsp;&nbsp;
+        
+                              <% if  user_signed_in? && r.writer == current_user.name && r.writer_email == current_user.email%>
+                                        <a href= "/article_board/modify_reply/<%=r.id %>" >수정</a>
+                                        <a href = "/article_board/delete_reply/<%= r.id %>" >삭제</a>
+                              <% else %>
+                              <% end %>
+                        <% end %>
+                     <hr style="margin: 5px 0px 5px 0px;">
+                     <% end %>
+                  <% else %>
+                   댓글을 다려면 로그인해주세요
+                  <% end %>
+            
+                                        
+                    
+
+              </div></label>
+              
+                                  <!-- 댓글 입력 -->     
+                    
+                        <!--로그인을 한 경우 -->
+                    <%if user_signed_in?%>
+                        
+                            <form style="margin-top: -30px; margin-bottom: 30px;" action = "/article_board/write_reply/" method="POST">
+                                <input type = "hidden" name = "article_id" value = "<%=@this_post.id%>">
+                                
+                                <input type = "hidden" name = "email" value = "<%= current_user.email %>">
+                                <input type = "hidden" name = "username" value = "<%= current_user.name %>">
+                                <div style="margin-bottom: 30px;">
+                                <div class="col-md-11" style="padding: 0px; margin:0px;"><input style="font-size: 13px; margin:0px;" placeholder="댓글을 입력해주세요"class="form-control"  type = "text" name="myreply"></div>
+                                <div class="col-md-1" style="padding: 0px; margin:0px;"><input  id="reply_button" type = "submit" value = "작성"></div>
+                                </div>
+                            </form>
+                        
+                        
+                      
+                        <!--로그인을 하지 않은 경우 -->
+                    <%else %>
+
+                    
+                    <%end%>
+                    
+                    
+
+            </div>
+            
+            
+            
+            
+     </div>
+    </div>
+     
 <!-- 본문 -->   
 
 
-<!-- 상세 설명 -->         
-        <p>
-        <div class="row">
-            <div class="col-lg-12" style="word-break:break-all"><%= @this_post.contents %></div>
-            <!-- word-break:break-all : 숫자, 영문 연속 입력시 강제개행 -->
-        </div>
-        </p>
-<!-- 이미지 -->         
-        <p><center><img class="img-responsive" src="<%= @this_post.my_image.url %>"></center></p>
-        
-        
-        
-<!-- demo link -->
-          <% if @this_post.demo_link == nil || @this_post.demo_link == "" %>
-            <!-- demo_link가 없으면 표시하지 않음 -->
-          <% else %>
-            <h2><center><a href="http://<%= @this_post.demo_link %>" target="_blank">Demo link</a></center></h2>
-          <%end %>
-        <br>
-        <br>
-        
-<!-- 리더 -->
-        <p align="left">팀 리더 : <%= @this_post.leader_name%></p>
-        <br>
-<!-- 팀원 -->
-        <p align ="left">팀 구성원 : <%= @this_post.member_name%></p>
-        <br>
-
-<!-- 연락처 -->
-        <p align="left">카카오ID : <%= @this_post.contact_kakao%></p>
-        <br>
-        
-        <p align="left">E-MAIL : <%= @this_post.contact_email%></p>
-<!-- 태그 -->
-
-<!-- 포스팅 시간 -->  
-        <p align="right">최종 수정 : <%= @this_post.updated_at.in_time_zone("Seoul").strftime("%Y/%m/%d %I:%M:%S%p")%><p>
-     
-<!-- 댓글 입력 -->     
-
-    <!--로그인을 한 경우 -->
-<%if user_signed_in?%>
-    <%= current_user.name %>
-        <form action = "/article_board/write_reply/" method="POST">
-            <input type = "hidden" name = "article_id" value = "<%=@this_post.id%>">
-            
-            <input type = "hidden" name = "email" value = "<%= current_user.email %>">
-            <input type = "hidden" name = "username" value = "<%= current_user.name %>">
-            
-            <div class="col-md-11"><input class="form-control"  type = "text" name="myreply"></div>
-            <div class="col-md-1"><input class="btn btn-success" type = "submit" value = "Reply"></div>
-        </form>
-    </div>
-    
-    <!-- 좋아요 버튼 -->
-    <% if current_user.articles.where(statuses: {liked: true}).include? @this_post %>
-      <a href="/article_board/like_delete/<%= @this_post.id %>" class="btn btn-default" type="submit">좋아요<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp;<%= @this_post.like %></a>
-    <% else %>
-      <a href="/article_board/like_process/<%= @this_post.id %>" class="btn btn-default" type="submit">좋아요<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp;<%= @this_post.like %></a>
-    <% end %>
-    <% if current_user.articles.where(statuses: {selected: true}).include? @this_post %>
-      <a href="/article_board/select_delete/<%= @this_post.id %>" class="btn btn-default" type="submit">찜 빼기</a>
-    <% end %>
-    <!--로그인을 하지 않은 경우 -->
-<%else %>
-        <div class="alert alert-danger" role="alert">
-          <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-          <span class="sr-only">Error:</span>
-          리플을 달려면 로그인을 해주세요
-        </div>
-    </div>
-    
-    <%if user_signed_in?%>
-      <!-- 좋아요 버튼 -->
-      <button class="btn btn-default">좋아요<span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>&nbsp;<%= @this_post.like %></button>
-    <% end %>
-    
-    
-<%end%>
-
       
-<!-- 댓글 출력 --> 
-        <% @this_post.replies.each do |r| %>
-            <div class="well well-sm">
-                 <p><strong><%= r.writer %></strong> : <%= r.contents %></p>
-       
-       <!-- 유저 확인 후 수정/삭제 버튼 출력 -->          
-        <% if  user_signed_in? && r.writer == current_user.name && r.writer_email == current_user.email%>
-                <a href= "/article_board/modify_reply/<%=r.id %>" class="btn btn-primary active" role="button">수정</a>
-                <a href = "/article_board/delete_reply/<%= r.id %>" class="btn btn-primary active" role="button">삭제</a>
-        <% else %>
-        <% end %>
-       
-            </div>
-        <% end %>
 </div>
 
 <br>
-
-<!-- 글 수정, 삭제 --> 
-<div class="row">
-    <div class="col-md-4"></div>
-    <div class="col-md-4">
-        <center>
-            <a href= "/article_board/pw_chk_process_m/<%= @this_post.id%>" class="btn btn-primary active" role="button">수정</a>
-            <a href = "/article_board/pw_chk_process_d/<%= @this_post.id%>" class="btn btn-primary active" role="button">삭제</a>
-            <a href="/article_board/main_board" class="btn btn-primary active" role="button">목록보기</a>
-        </center>
-    </div>
-    <div class="col-md-4"></div>
-</div>
-
-</div>
 
  <%= render :partial => "/article_board/bottom" %>
 

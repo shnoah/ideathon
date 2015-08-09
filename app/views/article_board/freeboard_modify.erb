@@ -9,13 +9,13 @@
      
      <div class="col-md-12 col-sm-12 co-xs-12">
      <div class="form-style-10">
-          <form action="/article_board/freeboard_write_action" method="POST" enctype="multipart/form-data" name="write_form" onsubmit="return overTag()">
+          <form action="/article_board/freeboard_modify_action" method="POST" enctype="multipart/form-data" name="write_form" onsubmit="return overTag()">
            
               <div class="section">✔컨텐츠</div>
               <div class="inner-wrap">
-                  <input type = "hidden" value = "<%=@this_article.id%>" name= "m_id">
+                <input type = "hidden" value = "<%=@this_article.id%>" name= "m_id">
                   <label>제목 <input type="text" name="m_title" value="<%=@this_article.free_title%>" required/></label>
-                  <label>내용 <textarea rows="20" name="m_contents" required><%=@this_article.free_article%></textarea></label>  
+                  <label style = "color:black">내용 <textarea rows="20" name="m_contents" required><%=@this_article.free_article%></textarea></label>  
               </div>
              
               

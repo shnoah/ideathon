@@ -1,29 +1,20 @@
 class ArticleBoardController < ApplicationController
   
    before_action :authenticate_user!, only: [:write, :write_process]  
+
    
-   
-    @@best_id= 1
-    @@best_num =20
-   
+    def json_test ## 회원 DB json 파일 test
     
-    
-    def json_test
-        
        @data_hash = Hash.new
         path=Rails.root.to_s
-        file = File.read(path+'/public/userdbsample.json')
+        file = File.read(path+'/public/userdb1.json')
     
         @data_hash = JSON.parse(file)
-       
-       
-        
-       
         
     end
     
    
-    def main_board        
+    def main_board
         @tags = Tag.all
         @articles = Article.all
         
@@ -204,6 +195,17 @@ class ArticleBoardController < ApplicationController
   
         redirect_to action: "detailpage", id: @this_page
     end
+    
+    def update_reply1
+        @this_post = Reply.find(params[:id]) #수정할 데이터를 뽑는다.
+        @this_post.contents = params[:new_reply] #새로운 데이터를 쓴다
+        
+        @this_page = @this_post.article_id
+        
+        @this_post.save # 저장 
+  
+        redirect_to action: "hall_of_fame", id: @this_page
+    end
 
 #리플삭제  
     def delete_reply    
@@ -221,17 +223,25 @@ class ArticleBoardController < ApplicationController
     def modify_reply
         @this_post = Reply.find(params[:id])      
     end
+    
+    def modify_reply1
+        @this_post = Reply.find(params[:id])      
+    end
 
-#글 삭제시 사용    
+#글 삭제시 비밀번호 체크    
     def pw_chk_process_d
         @this_post = Article.find(params[:id])
     end
     
+#글 수정시 비밀번호 체크    
     def pw_chk_process_m 
         @this_post = Article.find(params[:id])
     end
-    
-    def article_modify     
+
+#글 수정    
+    def article_modify    
+        
+        
         @flag=0
         @this_post = Article.find(params[:id]) 
         
@@ -256,8 +266,7 @@ class ArticleBoardController < ApplicationController
         
         if (@this_post.password==match)
             @flag=1
-            
-            
+           
             tmp = User.find(current_user.id)
             tmp.posting_check = 0
             tmp.my_article_id = nil
@@ -274,55 +283,37 @@ class ArticleBoardController < ApplicationController
     
     ##
     def hall_of_fame
-        @best_id=@@best_id
-        @best_num=@@best_num
-        @articles= Article.all
+        #@best_id=@@best_id
+        #@best_num=@@best_num
+        #@articles= Article.all
     
         ## 해시 사용 버젼
-        #candidates = Hash.new
-        #@articles.each do |item|
-        #    candidates[item] = item.like
-        #end
+        @articles = Article.all
+        candidates = Hash.new
+        @articles.each do |item|
+            candidates[item] = item.like
+        end
         
-        #sorted_candidates = candidates.sort_by { |key, value| value }
+        sorted_candidates = candidates.sort_by { |key, value| value }
         
-        #@real_best = sorted_candidates[-1][0]
+        @real_best = sorted_candidates[-1][0]
     end
-    
+
+
+
+
+
     def hall_of_fame_action
         
-        @statuses  =Status.all
-        @best_id     =1
-        @best_num    =0
-        @best_id1    =1
-        @best_num1   =0
+        @statuses = Status.all
         
-        @articles = Article.all.where(:fame => false)
-        
-    #루비문이고 제일 좋아요가 높은 아이템의 아이디를 받아내는 코드입니다#%
-        @articles.each do |x|
-           
-                @best_id1=x.id
-                @best_num1=x.like
-                 if (@best_num.to_i < @best_num1.to_i)
-                     @best_num=@best_num1
-                     @best_id=@best_id1 
-                     end
+        @statuses.each do |item|
+            item.liked = false
         end
-        @@best_id=@best_id
-        @@best_num=@best_num
-       
-     hey = Article.where(:id => @best_id).take
-     hey.fame=true
-     hey.save
-     
-      @articles.each do |x|
-         hey=Article.where(:id =>x.id).take
-         hey.like=0
-         hey.save
-     end
+        
+        
     
-    @statuses.each do |k|
+        @statuses.each do |k|
         k.liked = false
         k.save
     end
@@ -351,16 +342,19 @@ class ArticleBoardController < ApplicationController
     
     def freeboard_modify
         
-        @this_article = Freearticle.find(params[:m_id])
+        @this_article = Freearticle.find(params[:id])
         
     end
     
     
     def freeboard_modify_action
         
-        fm= Freearticle.where
-        
-        redirect_to '/article_board/freeboard_detail/'
+        fm= Freearticle.where(:id => params[:m_id]).take
+        fm.free_title = params[:m_title]
+        fm.free_article= params[:m_contents]
+        fm.save
+        k =fm.id
+        redirect_to '/article_board/freeboard/'
     end
     
     
@@ -380,7 +374,33 @@ class ArticleBoardController < ApplicationController
      redirect_to '/article_board/freeboard'
     end
     
+    def freeboard_delete
+        
+        @this_post= Freearticle.find(params[:id])
+        
+        
+    end
     
+    def freeboard_delete_process     
+
+        
+        @flag=0
+        @this_post = Freearticle.find(params[:id]) 
+        
+        match = params[:delete_password]
+        
+        if (@this_post.free_password==match)
+            @flag=1
+            @this_post.destroy
+            
+            redirect_to '/article_board/freeboard'       
+        else
+            @flag = 0      
+        end          
+
+    end
     
+    def test
+    end
 end
 ################################################################################

@@ -1,7 +1,22 @@
 <%= render :partial => "/article_board/navbar" %>
-<h1>비밀번호를 입력해 주세요</h1>
-<form action = "/article_board/article_modify/<%=@this_post.id%>" method ="POST">
-    password : <input type = "password" name = "modify_password"><br>
-    <input type = "submit" value = "확인">
-</form>
-<a href = "https://hackathon-woodykim-1.c9.io/article_board/detailpage/<%=@this_post.id%>">돌아가기</a>
+
+     <div class="col-md-8 col-md-offset-2 col-sm-12 co-xs-12">
+     <div class="form-style-10" style="padding: 45px 0px 45px 0px;">
+          <form action = "/article_board/article_modify/<%=@this_post.id%>" method ="POST">
+              <div class="section" style="padding-left: 40px"> 비밀번호 확인</div>
+              <div class="inner-wrap">
+                   <input type = "password" name = "modify_password" placeholder="&nbsp;비밀번호를 입력해주세요." required/>
+            </div>
+             <div style="text-align: center;">
+                   <a class="button-section"  href="https://hackathon-woodykim-1.c9.io/article_board/detailpage/<%=@this_post.id%>">
+                    <input type="button" value="돌아가기">                 
+                   </a>
+                    <input class="button-section" type="submit" name="Sign Up" value="수정하기"/>
+              </div>
+          </form>
+        </div>
+        </div>
+          
+          
+              </div>
+<%= render :partial => "/article_board/bottom" %>
