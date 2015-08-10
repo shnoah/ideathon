@@ -45,6 +45,7 @@ ActiveRecord::Schema.define(version: 20150809154054) do
 
   create_table "bests", force: :cascade do |t|
     t.integer  "todaybest_id"
+    t.integer  "like"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
   end

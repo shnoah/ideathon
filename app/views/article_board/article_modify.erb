@@ -3,7 +3,7 @@
 <% if @flag == 1 %>
        <div class="col-md-12" style="height:auto;; text-align:center; border-top: 1px solid #b7b7b7; border-bottom: 1px solid #b7b7b7; background-color: #e5e5e5; margin:0px 0px 0px 0px;"> 
         <div style="padding: 27px 0px 30px 0px;">
-          <span style="font-weight: 800; color:#727272; font-size: 120%;">아이디어 제출 |</span> 
+          <span style="font-weight: 800; color:#727272; font-size: 120%;">아이디어 수정 |</span> 
           <span style="font-weight: 500;color:#b2b2b2; font-size: 120%;">&nbsp;아이디어를 제출 마감은 8월23일(일)입니다</span>
         </div>
         </div>
@@ -14,17 +14,17 @@
            <input type="hidden" value="<%=current_user.email%>" name="posting_check_email">
               <div class="section" style="padding-left: 40px"> 서비스소개</div>
               <div class="inner-wrap">
-                  <label><span style="margin-bottom: 10px; font-weight: 900;">서비스명(필수)</span> <input type="text" name="title" value=<%=@this_post.title%> required/></label>
-                  <label><span style="margin-bottom: 10px; font-weight: 900;">한줄설명(필수)</span> <input type="text" maxlength="20" name="summary" value=<%=@this_post.summary%> required /></label>
+                  <label><span style="margin-bottom: 10px; font-weight: 900;">서비스명(필수)</span> <input type="text" name="title" value=<%=@this_post.title%> required></label>
+                  <label><span style="margin-bottom: 10px; font-weight: 900;">한줄설명(필수)</span> <input type="text" maxlength="20" name="summary" value="<%=@this_post.summary%>" required></label>
                   <label><span style="margin-bottom: 10px; font-weight: 900;">상세설명(필수)</span> <textarea rows="3" style="color: #66696B;" name="contents"  required><%=@this_post.contents %></textarea></label>
-                  <label><span style="margin-bottom: 10px; font-weight: 900;">데모링크</span> <input type="text" style="color: #66696B;" name="demo_link" value=<%=@this_post.demo_link%> /></label>      
+                  <label><span style="margin-bottom: 10px; font-weight: 900;">데모링크</span> <input type="text" style="color: #66696B;" name="demo_link" value=<%=@this_post.demo_link%>></label>      
                   <label><span style="margin-bottom: 10px; font-weight: 900;">이미지첨부</span> <div id="test" style="padding: 5px 10px 5px 10px;" > <input type=file name="image_file"> </div>
               </div>
           
               <div class="section" style="padding-left: 40px"> 팀/자기소개</div>
               <div class="inner-wrap">
                   <label><span style="margin-bottom: 10px; font-weight: 900;">팀대표자</span><input type="text" name="leader_name" value=<%=@this_post.leader_name%> /></label>
-                  <label><span style="margin-bottom: 10px; font-weight: 900;">팀구성원</span> <input type="text" name="member_name"value=<%=@this_post.member_name%> /></label>
+                  <label><span style="margin-bottom: 10px; font-weight: 900;">팀구성원</span> <input type="text" name="member_name"value=<%= @members.join(",") %> /></label>
               </div>
           
               <div class="section" style="padding-left: 40px"> 연락처</div>
@@ -48,107 +48,7 @@
 
 </div>
 
-  <div class="row">
-      <div class="col-lg-2"></div>
-      <div class="col-lg-8">
-        <form class="form-horizontal" action="/article_board/update/<%=@this_post.id%>" method="POST" enctype="multipart/form-data">
-            <fieldset>
-              <legend>수정페이지</legend>
-              
-              <div class="form-group">
-                <label class="col-lg-2 control-label">서비스명</label>
-                <div class="col-lg-10">
-                  <input type="text" class="form-control"  name="title" value="<%=@this_post.title%>" required>
-                </div>
-              </div>
-              
-              <div class="form-group">
-                <label class="col-lg-2 control-label">한줄 설명</label>
-                <div class="col-lg-10">
-                  <input type="text" class="form-control" maxlength="160" name="summary" value="<%=@this_post.summary%>" required>
-                  <span class="help-block">160자까지 가능합니다.</span>
-                </div>
-              </div>
-              
-              <div class="form-group">
-                <label class="col-lg-2 control-label">데모링크</label>
-                <div class="col-lg-10">
-                  <input type="text" class="form-control"  name="demo_link" value="<%=@this_post.demo_link%>">
-                </div>
-              </div>
-              
-              
-              <div class="form-group">
-                <label for="textArea" class="col-lg-2 control-label">상세 설명</label>
-                <div class="col-lg-10">
-                  <textarea class="form-control" rows="3"  name="contents" required><%=@this_post.contents%></textarea>
-                </div>
-              </div>
   
-            <div class="form-group">
-                <label class="col-lg-2 control-label">이미지 첨부</label>
-                <div class="col-lg-10">
-                <input type=file name="image_file">
-                <span class="help-block">캡처 이미지, 손으로 그린 그림 등 모두 가능합니다.</span>
-                 </div>
-              </div>
-              
-            
-            <div class="form-group">
-                <label class="col-lg-2 control-label">팀 리더 이름</label>
-                <div class="col-lg-10">
-                  <input type="text" class="form-control"  name="leader_name" value="<%=@this_post.leader_name%>">
-                </div>
-            </div>
-            
-            
-            <div class="form-group">
-              <label class="col-lg-2 control-label">팀 구성원</label>
-              <div class="col-lg-10">
-                
-                <input type="text" class="form-control"  name="member_name" value="<%=@this_post.member_name%>">
-                <span class="help-block">"학교명/이름" 형식으로 입력해주세요.</span>
-              </div>
-            </div>
-              
-              
-            <div class="form-group">
-                <label class="col-lg-2 control-label">카카오톡</label>
-                <div class="col-lg-10">
-                  <input type="text" class="form-control"  name="contact_kakao" value="<%=@this_post.contact_kakao%>">
-                  <span class="help-block">등록한 연락처로 팀빌딩과 관련된 연락을 주고받을 수 있습니다. </span>
-                </div>
-            </div>
-              
-            <div class="form-group">
-                <label class="col-lg-2 control-label">E-mail</label>
-                <div class="col-lg-10">     
-                  <input type="text" class="form-control"  name="contact_email"value="<%=@this_post.contact_email%>">
-                  <span class="help-block">등록한 연락처로 팀빌딩과 관련된 연락을 주고받을 수 있습니다. </span>
-                </div>
-            </div>
-              
-  <!--
-            <div class="form-group">
-                <label class="col-lg-2 control-label">태그</label>
-                <div class="col-lg-10">
-                  <input type="text" class="form-control"  name="tag" placeholder="#맞팔#소통 금지 (미구현) (256Bytes)" required>
-                  <span class="help-block">최대 3개의 태그를 등록할 수 있습니다. 태그는 아이디어 검색에  사용됩니다.</span>
-                </div>
-              </div>           
-  -->        
-              <div class="form-group">
-                <div class="col-lg-10 col-lg-offset-2">
-                  <a href="/article_board/detailpage/<%=@this_post.id%>" class="btn btn-default" role="button">돌아가기</a>
-                  <button type="reset" class="btn btn-default">Reset</button>
-                  <button type="submit" class="btn btn-primary">수정</button>
-                </div>
-              </div>
-            </fieldset>
-          </form>
-      </div>
-      <div class="col-lg-2"></div>
-  </div>  
 <% else %>
 
      <div class="col-md-8 col-md-offset-2 col-sm-12 co-xs-12">

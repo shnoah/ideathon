@@ -265,4 +265,9 @@
   </div>
 </div>
 </div>
+<!-- 좋아요 리셋 버튼 꾸밀필요 음슴-->
+<% if user_signed_in? && (current_user.email == "cokr3430@gmail.com" || current_user.email == "ohs2033@korea.ac.kr") %>
+    <a href="/article_board/hall_of_fame_action">리셋해버렷!</a>
+<% end %>
+
 <%= render :partial => "/article_board/bottom" %>

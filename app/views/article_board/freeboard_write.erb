@@ -1,38 +1,60 @@
 <%= render :partial => "/article_board/navbar" %>
-
-       <div class="col-md-12" style="height:auto;; text-align:center; border-top: 1px solid #b7b7b7; border-bottom: 1px solid #b7b7b7; background-color: #e5e5e5; margin:0px 0px 0px 0px;"> 
+       <div class="col-md-12" style="height:auto;; text-align:center; border-top: 1px solid #b7b7b7; border-bottom: 1px solid #b7b7b7; background-color: #e5e5e5; margin:20px 0px 0px 0px;"> 
         <div style="padding: 27px 0px 30px 0px;">
-          <span style="font-weight: 800; color:#727272; font-size: 120%;">자유 게시판</span> 
-          <span style="font-weight: 500;color:#b2b2b2; font-size: 120%;">&nbsp;자유롭게 글을 써 주세요.</span>
+          <span style="font-weight: 800; color:#727272; font-size: 120%;">자유게시판 |</span> 
+          <span style="font-weight: 500;color:#b2b2b2; font-size: 120%;">&nbsp;자유롭게 질문해주세요</span>
         </div>
-      </div>
+        </div>
      
-     <div class="col-md-12 col-sm-12 co-xs-12">
-     <div class="form-style-10">
-          <form action="/article_board/freeboard_write_action" method="POST" enctype="multipart/form-data" name="write_form" onsubmit="return overTag()">
+     
+    <% if user_signed_in? %>
+ 
+     
+     <div class="col-md-8 col-md-offset-2 col-sm-12 co-xs-12">
+     
+     <div class="form-style-10" style="padding: 45px 0px 45px 0px;">
+        <form action="/article_board/freeboard_write_action" method="POST" enctype="multipart/form-data" name="write_form" onsubmit="return overTag()">
            
-              <div class="section">✔컨텐츠</div>
+              <div class="section" style="padding-left: 40px;">자유게시판 작성</div>
               <div class="inner-wrap">
                   <label>제목 <input type="text" name="f_title" placeholder="글 제목을 입력해 주세요." required/></label>
                   <label>내용 <textarea rows="20" name="f_contents" style="color:black" required></textarea></label>  
               </div>
              
               
-              <div class="section">✔ 비밀번호</div>
+              <div class="section" style="padding-left: 40px;">비밀번호</div>
                   <div class="inner-wrap">
-                  <label>비밀번호<input type="password" name="f_password" /></label>
+                 <label>비밀번호<input type="password" name="f_password" /></label>
               </div>
               
               
               <div class="button-section">
                
-                     <div style = "text-align:center"><input type="submit" value="작성하기"/>
+                     <div style = "text-align:center; margin-top:30px;"><input type="submit" value="작성하기"/>
                      </div>
                    <br>
                    <br>
                    <br>
               </div>
           </form>
+      
           </div>
-     </div>
-     
+        </div>
+        
+        <% else %>
+              <div class="col-md-12 col-xs-12 col-sm-12" style="height:auto; padding: 10px 0px 10px 0px; border-bottom: 1px solid #b7b7b7; margin:0px 0px 0px 0px; background-color: #e0dede;"> 
+              <div class="col-md-12 col-xs-12 col-sm-12" style="text-align:center; padding: 30px 0px 30px 0px;">
+                <span style="font-size: 120%; font-weight: 800;  color:#EE9025; "> ! 먼저 로그인해주세요 </span>
+              </div>      
+          </div>
+         <% end %>    
+            
+</div>
+ <%= render :partial => "/article_board/bottom" %>
+ 
+ 
+      <!--- 수정중 -->
+  
+  
+ 
+ 

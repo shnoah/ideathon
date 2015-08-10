@@ -19,10 +19,36 @@
 
 
 
+.container { position:relative; }
+.container video {
+    position:relative;
+    z-index:0;
+}
+.overlay {
+    position:absolute;
+    top:0;
+    left:0;
+    z-index:1;
+}
+
+
 .cd-top {
     position: fixed;
     z-index: 999;
 }
+
+
+.list-group-item {
+    border: 0px;
+    
+}
+
+.list-group {
+    border: 0px;
+    box-shadow: none;
+    margin: 0px;
+}
+
 
 
 
@@ -606,3 +632,15 @@
    box-shadow: 0px 1px 1px gray;
     padding: 30px;
 }
+
+
+.video-container {
+height: auto;
+width: auto;
+display: block;
+position: fixed;
+overflow: hidden;
+z-index: -10000;
+background: url(/logo.png);
+ }
+

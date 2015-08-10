@@ -108,31 +108,39 @@ class ArticleBoardController < ApplicationController
             tags = params[:tag].split(/[#,\s]/)
             tags.delete("")
             
-            post = Article.new
+            new_post = Article.new
     
-            post.title =params[:title]
-            post.summary = params[:summary]
-            post.contents = params[:contents]
-            post.demo_link = params[:demo_link]
-            post.my_image = params[:image_file]
-            post.leader_name = params[:leader_name]
-            post.contact_kakao = params[:contact_kakao]
-            post.contact_email = params[:contact_email]
-            post.password = params[:password]
-            post.member_name = params[:member_name]
-    
-            post.save
+            new_post.title =params[:title]
+            new_post.summary = params[:summary]
+            new_post.contents = params[:contents]
+            new_post.demo_link = params[:demo_link]
+            new_post.my_image = params[:image_file]
+            new_post.leader_name = params[:leader_name]
+            new_post.contact_kakao = params[:contact_kakao]
+            new_post.contact_email = params[:contact_email]
+            new_post.password = params[:password]
+            new_post.save
             
+            members = params[:member_name].gsub(/\s+/, "").split(",")
+            
+            members.each do |item|
+                member = Member.new
+                member.article_id = new_post.id
+                member.name = item
+                member.save
+                #member = Member.create(:name => item, :article_id => new_post.id)
+            end
+    
             #태그 넣는 작업
             tags.each do |tag_name|
-                new_tag = Tag.find_by_tagging(tag_name)||Tag.create(:tagging => tag_name, :created_at => post.id)
-                post.tags << new_tag
+                new_tag = Tag.find_by_tagging(tag_name)||Tag.create(:tagging => tag_name, :created_at => new_post.id)
+                new_post.tags << new_tag
             end
             
             tmp = User.find(current_user.id)
             
             tmp.posting_check =1             #한 ID 당 글은 1개만
-            tmp.my_article_id = post.id      #자신이 쓴 글번호 저장
+            tmp.my_article_id = new_post.id      #자신이 쓴 글번호 저장
             
             tmp.save
             
@@ -159,8 +167,24 @@ class ArticleBoardController < ApplicationController
         @this_post.leader_name = params[:leader_name]
         @this_post.contact_kakao = params[:contact_kakao]
         @this_post.contact_email = params[:contact_email]
-    
         @this_post.save # 저장 
+        
+        
+        @this_post.members.each do |item|
+            item.destroy
+        end
+        
+        members = params[:member_name].gsub(/\s+/, "").split(",")
+            
+        members.each do |item|
+            member = Member.new
+            member.article_id = @this_post.id
+            member.name = item
+            member.save
+            #member = Member.create(:name => item, :article_id => new_post.id)
+        end
+        
+        
   
         redirect_to action: "detailpage", id: @this_post.id
     end
@@ -243,6 +267,12 @@ class ArticleBoardController < ApplicationController
         
         @flag=0
         @this_post = Article.find(params[:id]) 
+        @members = Array.new
+        
+        @this_post.members.each do |item|
+            @members << item.name
+        end
+        
         
         match = params[:modify_password]
         
@@ -281,49 +311,51 @@ class ArticleBoardController < ApplicationController
     
     ##
     def hall_of_fame
-        #@best_id=@@best_id
-        #@best_num=@@best_num
-        #@articles= Article.all
-    
-        ## 해시 사용 버젼
-        @articles = Article.all
-        candidates = Hash.new
-        @articles.each do |item|
-            candidates[item] = item.like
+        today_best = Best.all.last
+        if today_best.nil?
+            redirect_to '/article_board/main_board'
+            
+        else
+        @real_best = Article.find(today_best.todaybest_id)
+        @real_best_like = today_best.like
         end
-        
-        sorted_candidates = candidates.sort_by { |key, value| value }
-        
-        @real_best = sorted_candidates[-1][0]
     end
-
-
-
-
 
     def hall_of_fame_action
         
         statuses = Status.all
-        
+            
         statuses.each do |item|
             item.liked = false
             item.save
         end
         
-        @articles = Article.all
+        articles = Article.all
         candidates = Hash.new
-        @articles.each do |item|
+        articles.each do |item|
             candidates[item] = item.like
+            item.like = 0
+            item.save
         end
         
         sorted_candidates = candidates.sort_by { |key, value| value }
         
         @real_best = sorted_candidates[-1][0]
         
-     #각 유저와의 연결도 초기화하는 것을만들어야 함.
-      redirect_to '/article_board/hall_of_fame/'
-            
-     #######################################################################%>     
+        while @real_best.fame == true
+            sorted_candidates.pop
+            @real_best = sorted_candidates[-1][0]
+        end
+        
+        today_best = Best.new
+        today_best.todaybest_id = @real_best.id
+        today_best.like = sorted_candidates[-1][1]
+        today_best.save
+        
+        @real_best.fame = true
+        @real_best.save
+        @real_best_like = sorted_candidates[-1][1]
+        
     end
     
     def freeboard

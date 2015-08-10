@@ -1,6 +1,7 @@
 <!-- 수정완료 -->
 <%= render :partial => "/article_board/navbar" %>
-      
+     
+    
     <div class="row">
     <a href="/article_board/main_board/?tab=random" >
       <div class="col-md-4 col-sm-4 col-xs-4 " style="padding-right: 10px; padding-left:10px;">
@@ -25,7 +26,7 @@
     <div style="padding: 27px 0px 30px 0px;">
           <span style="font-weight: 800; color:#727272; font-size: 120%;">명예의 전당 |</span> 
           <span style="font-weight: 500;color:#b2b2b2; font-size: 120%;">&nbsp;오늘의 BEST IDEA는</span> 
-          <span style="font-weight: 800;color:#EE9A3A; font-size: 120%;"> 좋아요 <%= @real_best.like %></span> <span style="font-weight: 500;color:#b2b2b2; font-size: 120%;">개를 받은</span> 
+          <span style="font-weight: 800;color:#EE9A3A; font-size: 120%;"> 좋아요 <%= @real_best_like %></span> <span style="font-weight: 500;color:#b2b2b2; font-size: 120%;">개를 받은</span> 
            <span style="font-weight: 800;color:#EE9A3A; font-size: 120%;"><%= @real_best.title %></span> <span style="font-weight: 500;color:#b2b2b2; font-size: 120%;">입니다</span>
         </div>
         </div>
@@ -70,10 +71,18 @@
               <div class="inner-wrap">
               
                   <label style="word-break:break-all"><span style="margin-bottom: 10px; font-weight: 900;">상세설명</span> 
-                  <div id="test"><div><%= @real_best.contents %></div></div></label>
+                  <div id="test"><div><%= @real_best.contents.gsub( /\n/, '<br />').html_safe %></div></div></label>
                   
                   <label><span style="margin-bottom: 10px; font-weight: 900;">팀멤버</span> 
-                  <div id="test2"><div><strong><%= @real_best.leader_name%></strong><%= @real_best.member_name%></div></div></label>
+                    <div id="test2">
+                      <div><strong><%= @real_best.leader_name%>(팀장)</strong>,
+                        <% @real_best.members.each do |item| %>
+                          <%= item.name %>,
+                        <% end %>
+                        <%#= @this_post.members.inspect %>
+                      </div>
+                    </div>
+                  </label>
                   
                   <label><span style="margin-bottom: 10px; font-weight: 900;">이메일</span> 
                   <div id="test2"><div><%= @real_best.contact_email%></div></div></label>
@@ -107,34 +116,39 @@
                          등록된 댓글이 없습니다
                         <% else %> 
                           <!-- 댓글 --->
-                          <div class="panel-group" id="accordion<%= r.id %>" role="tablist" aria-multiselectable="true" style="margin-bottom: 0;">
-                            <div class="panel panel-default">
+                          
+                        <div class="panel-group" id="accordion<%= r.id %>" role="tablist" aria-multiselectable="true" style="margin-bottom: 0;">
+                            <div >
                               <div class="panel-heading" role="tab" id="heading<%= r.id %>">
                                 <h4 class="panel-title">
                                   <a role="button" data-toggle="collapse" data-parent="#accordion<%= r.id %>" href="#collapse<%= r.id %>" aria-expanded="false" aria-controls="collapseOne">
-                                    <%= r.writer %> : <%= r.contents %> &nbsp;&nbsp;
+                                    <span style="font-weight: 700; font-size: 15px;"><%= r.writer %> :</span> <span style="font-weight: 500; font-size: 15px;"><%= r.contents %></span> &nbsp;&nbsp;
                                   </a>
+                                  <span style="font-weight: 500; font-size: 12px; color: #EB9746; margin-bottom: 3px;">
                                     <a data-toggle="collapse" href="#re_reply_write<%= r.id %>" aria-expanded="false" aria-controls="re_reply_write<%= r.id %>">답글</a>
                                   <% if  user_signed_in? && r.writer == current_user.name && r.writer_email == current_user.email%>
                                     <a href= "/article_board/modify_reply/<%=r.id %>" >수정</a>
                                     <a href = "/article_board/delete_reply/<%= r.id %>" >삭제</a>
                                   <% end %>
+                                  </span>
                                 </h4>
                               </div>
                               <div id="re_reply_write<%= r.id %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<%= r.id %>">
-                                <div class="panel-body">
-                                  <form action="/article_board/re_reply_write" method="POST">
-                                    <input type="hidden" value="<%= r.id %>" name="reply_id">
-                                    답글 달기 : <input type="string" name="contents">
-                                    <button type="submit">작성</button>
+                                <div class="panel-body" style="border: none;">
+                                
+                                <form action="/article_board/re_reply_write" method="POST">
+                               <input type="hidden" value="<%= r.id %>" name="reply_id">
+                                <div class="col-md-5" style="padding: 0px; margin:0px;"><input style="font-size: 13px; margin:0px;" placeholder="댓글을 입력해주세요"class="form-control"  type = "string" name="contents"></div>
+                                <div class="col-md-1" style="padding: 0px; margin:0px;"><input  id="reply_button" type = "submit" value = "작성"></div>
+          
                                   </form>
                                 </div>
                               </div>
-                              <div id="collapse<%= r.id %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="heading<%= r.id %>">
-                                <ul class="list-group">
+                              <div id="collapse<%= r.id %>" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="heading<%= r.id %>">
+                                <ul >
                                   <% r.re_replies.each do |item| %>
                                     <li class="list-group-item">
-                                      <%= item.writer %> : <%= item.contents %> &nbsp;&nbsp;
+                                      <span style="font-weight: 800; color: gray;">ㄴ&nbsp;<%= item.writer %></span> : <span style="font-weight: 500; color: gray;"><%= item.contents %> &nbsp;&nbsp;</span>
                                       <% if  user_signed_in? && item.writer == current_user.name && item.writer_email == current_user.email%>
                                         <a href = "/article_board/re_reply_delete/<%= item.id %>" >삭제</a>
                                       <% end %>
@@ -150,7 +164,6 @@
                   <% else %>
                    댓글을 다려면 로그인해주세요
                   <% end %>
-            
                                         
                     
 
@@ -192,6 +205,6 @@
      </div>
      
         <!------------------- css 수정중 ----------------------->
-  
+
 
 <%= render :partial => "/article_board/bottom" %>
