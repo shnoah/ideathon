@@ -6,17 +6,7 @@
     </div>
   </div><br>
   
- <% if user_signed_in? %>
  
- <div style = "text-align:center">
- <button type = "button"class="btn btn-default" aria-label="Left Align"><a href = "/article_board/freeboard_write">글 작성하기</a></button>
- </div>
- 
- <% else%>
- <br><br><br><br>
- <div style = "text-align:center">
- </div>
- <%end%>
  
  <%@fr.each do |x|%>
          <div class="form-style-10">
@@ -43,4 +33,16 @@
         
         
             
-            
+            <% if user_signed_in? %>
+ 
+ <div style = "text-align:center">
+ <button type = "button"class="btn btn-default" aria-label="Left Align"><a href = "/article_board/freeboard_write">글 작성하기</a></button>
+ </div>
+ 
+ <% else%>
+ <br><br><br><br>
+ <div style = "text-align:center">
+ </div>
+ <%end%>
+
+ <%= render :partial => "/article_board/bottom" %>

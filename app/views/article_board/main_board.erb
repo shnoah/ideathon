@@ -23,12 +23,14 @@
     
   <div class="tab-content">
   
-    <!-- RANDOM TAB -->
-  <% if @tag_id == 0 && params[:not_found].nil? || !params[:page].nil? %> 
-    <div role="tabpanel" class="tab-pane fade in active" id="random">
-  <% else %>
-    <div role="tabpanel" class="tab-pane fade" id="random">
-  <% end %>
+<!-- RANDOM TAB -->
+<% if !params[:tag_id].nil? || params[:not_found] == 'true' %>
+<div role="tabpanel" class="tab-pane fade" id="random">
+<% elsif params[:tab] == 'random' || params[:tab].nil? %>
+<div role="tabpanel" class="tab-pane fade in active" id="random">
+<% else %>
+<div role="tabpanel" class="tab-pane fade" id="random">
+<% end %>
   
   <div class="col-md-12" style="height:auto;; text-align:center; border-top: 1px solid #b7b7b7; border-bottom: 1px solid #b7b7b7; background-color: #e5e5e5; margin:30px 0px 30px 0px;"> 
     <div style="padding: 27px 0px 30px 0px;">
@@ -88,12 +90,12 @@
 
 
  
-    <!-- TAG TAB -->
-  <% if @tag_id == 0 && params[:not_found].nil? || !params[:page].nil?  %>
-    <div role="tabpanel" class="tab-pane fade" id="tag">
-  <% else %>
-    <div role="tabpanel" class="tab-pane fade in active" id="tag">
-  <% end %>
+<!-- TAG TAB -->
+<% if params[:tab] == 'tag'|| !params[:tag_id].nil? ||params[:not_found] == "true" %>
+  <div role="tabpanel" class="tab-pane fade in active" id="tag">
+<% else %>
+  <div role="tabpanel" class="tab-pane fade" id="tag">
+<% end %>
 
   <div class="col-md-12 col-xs-12 col-sm-12" style="height:auto;; text-align:center; border-top: 1px solid #b7b7b7; border-bottom: 1px solid #b7b7b7; margin:30px 0px 0px 0px; background-color: #e5e5e5;"> 
     <div style="padding: 27px 0px 30px 0px;">
@@ -192,8 +194,13 @@
     </div>
     
 <!-- My likes -->
+    <% if params[:tab] == 'likes' %>
+    <div role="tabpanel" class="tab-pane fade in active" id="likes">
+    <% else %>
+    <div role="tabpanel" class="tab-pane fade" id="likes">
+    <% end %>
+    
     <% unless user_signed_in? %>
-      <div role="tabpanel" class="tab-pane fade" id="likes">
         <div class="col-md-12" style="height:auto;; text-align:center; border-top: 1px solid #b7b7b7; border-bottom: 1px solid #b7b7b7; margin:30px 0px 0px 0px; background-color: #e5e5e5;"> 
           <div style="padding: 27px 0px 30px 0px;">
             <span style="font-weight: 800; color:#727272; font-size: 120%;">투표후보 |</span> 
@@ -208,7 +215,6 @@
           
   
     <% else %>
-      <div role="tabpanel" class="tab-pane fade" id="likes">
         <div class="col-md-12" style="height:auto;; text-align:center; border-top: 1px solid #b7b7b7; border-bottom: 1px solid #b7b7b7; margin:30px 0px 30px 0px; background-color: #e5e5e5;"> 
           <div style="padding: 27px 0px 30px 0px;">
             <span style="font-weight: 800; color:#727272; font-size: 120%;">투표후보 |</span> 

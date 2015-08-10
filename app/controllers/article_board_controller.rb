@@ -303,20 +303,23 @@ class ArticleBoardController < ApplicationController
 
     def hall_of_fame_action
         
-        @statuses = Status.all
+        statuses = Status.all
         
-        @statuses.each do |item|
+        statuses.each do |item|
             item.liked = false
+            item.save
         end
         
+        @articles = Article.all
+        candidates = Hash.new
+        @articles.each do |item|
+            candidates[item] = item.like
+        end
         
-    
-        @statuses.each do |k|
-        k.liked = false
-        k.save
-    end
-     
-     
+        sorted_candidates = candidates.sort_by { |key, value| value }
+        
+        @real_best = sorted_candidates[-1][0]
+        
      #각 유저와의 연결도 초기화하는 것을만들어야 함.
       redirect_to '/article_board/hall_of_fame/'
             
