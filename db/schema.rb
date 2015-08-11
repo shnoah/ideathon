@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150809154054) do
+ActiveRecord::Schema.define(version: 20150811110939) do
 
   create_table "article_images", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -48,6 +48,15 @@ ActiveRecord::Schema.define(version: 20150809154054) do
     t.integer  "like"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "free_replies", force: :cascade do |t|
+    t.string   "writer"
+    t.string   "writer_email"
+    t.integer  "freearticle_id"
+    t.string   "contents"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
   create_table "freearticles", force: :cascade do |t|

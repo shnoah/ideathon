@@ -455,5 +455,42 @@ class ArticleBoardController < ApplicationController
         redirect_to :back
         
     end
+    
+    def freearticle_reply_action
+        @my_reply = FreeReply.new
+        @my_reply.freearticle_id = params[:article_id]
+        
+        @my_reply.writer = params[:username]
+        @my_reply.writer_email = params[:email]
+        #리플에 글쓴이 이름, 이메일 모두 받는다. 리플에 이름 출력 + 수정 삭제 시 이중 체크
+        
+        @my_reply.contents = params[:myreply]
+        @my_reply.save
+        
+        redirect_to :back    
+    end
+       def modify_freereply
+        @this_post = FreeReply.find(params[:id])      
+     end
+        def delete_freereply    
+        @this_post = FreeReply.find(params[:id])
+        
+        one_reply = FreeReply.find(@this_post.id)
+        one_reply.destroy
+        
+        @this_page =@this_post.freearticle_id
+        
+        redirect_to :back
+    end
+       def update_freereply
+        @this_post = FreeReply.find(params[:id]) #수정할 데이터를 뽑는다.
+        @this_post.contents = params[:new_reply] #새로운 데이터를 쓴다
+        
+        @this_page = @this_post.freearticle_id
+        
+        @this_post.save # 저장 
+  
+        redirect_to action: "freeboard_detail", id: @this_page
+    end
 end
 ################################################################################

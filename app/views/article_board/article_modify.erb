@@ -15,7 +15,7 @@
               <div class="section" style="padding-left: 40px"> 서비스소개</div>
               <div class="inner-wrap">
                   <label><span style="margin-bottom: 10px; font-weight: 900;">서비스명(필수)</span> <input type="text" name="title" value=<%=@this_post.title%> required></label>
-                  <label><span style="margin-bottom: 10px; font-weight: 900;">한줄설명(필수)</span> <input type="text" maxlength="20" name="summary" value="<%=@this_post.summary%>" required></label>
+                  <label><span style="margin-bottom: 10px; font-weight: 900;">한줄설명(필수)</span> <input type="text" maxlength="20" name="summary" value=<%=@this_post.summary%> required></label>
                   <label><span style="margin-bottom: 10px; font-weight: 900;">상세설명(필수)</span> <textarea rows="3" style="color: #66696B;" name="contents"  required><%=@this_post.contents %></textarea></label>
                   <label><span style="margin-bottom: 10px; font-weight: 900;">데모링크</span> <input type="text" style="color: #66696B;" name="demo_link" value=<%=@this_post.demo_link%>></label>      
                   <label><span style="margin-bottom: 10px; font-weight: 900;">이미지첨부</span> <div id="test" style="padding: 5px 10px 5px 10px;" > <input type=file name="image_file"> </div>

@@ -11,4 +11,12 @@ class ApplicationController < ActionController::Base
       devise_parameter_sanitizer.for(:sign_up) { |u| u.permit(:name, :email, :password , :university) }
       devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:name, :email, :password, :university, :current_password, :is_female, :date_of_birth) }
   end
+  
+  def after_sign_in_path_for(resource)
+    "/article_board/main_board"
+  end
+  
+  def after_sign_out_path_for(resource)
+    "/article_board/main_board"
+  end
 end
