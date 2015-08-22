@@ -2,6 +2,7 @@
 <%= render :partial => "/article_board/navbar" %>
     <!-- Nav tabs -->
   <div class="row">
+  
     <a href="#random" aria-controls="random" role="tab" data-toggle="tab">
       <div class="col-md-4 col-sm-4 col-xs-4 " style="padding-right: 10px; padding-left:10px;">
         <div id="option_nav"><span style="font-weight: 900;">?</span> 랜덤보기</div>
@@ -43,9 +44,11 @@
     
   </div>
   
+
+  
       <div class="row">
         <% @articles.shuffle.each do |item| %>
-          <div class="col-md-3 col-md-offset-0 col-sm-6 col-xs-10 col-xs-offset-1">
+          <div class="col-md-3 col-md-offset-0 col-sm-12 col-xs-12 col-xs-offset-0">
             <a href="/article_board/detailpage/<%=item.id%>">
               <div class="thumbnail">
                 <%if item.my_image.url==nil %>
@@ -54,19 +57,30 @@
                   <img style="border-radius: 20px; " src="<%=item.my_image.url(:thumb)%>"/>    
                 <% end %>
                 <div class="caption" style="padding-bottom: 0px;">
-                  <h4 style="font-weight: 800; color:#EB8E34;letter-spacing: 0px;"><%= item.title %></h4>
+              <!--8/13 3:49 변경 -->
+                  <% unless item.title.length > 14 %>
+                    <h4 style="font-weight: 800; color:#EB8E34;letter-spacing: 0px;"><%= item.title %></h4>
+                  <% else %>
+                    <h4 style="font-weight: 800; color:#EB8E34;letter-spacing: 0px;"><%= item.title.first(13)+"..." %></h4>
+                  <% end %>
                   <div style="width:100%;height:20px">
                   <h5 style="word-spacing: -2px; font-weight: 700; letter-spacing: 0px; color: #717171;font-size:100%" ><%= item.summary.first(20) %></h5>
                   </div>
                   <div style="margin-top: 1px solid white;"></div>
                   <div style="font-weight: 700; color: #8E8E8E; margin-bottom: 1px solid black;">   <!--팀장명 오른쪽 정렬 처리-->
-                   <hr style="margin: 10px 0px 10px 0px;"><%= item.leader_name %>팀  <br>
-                     
-                     <div style="width:100%;height:20px" >
+                  
+                   <hr style="margin: 10px 0px 10px 0px;">
+                   <% unless item.leader_name.length > 14%>
+                     <%= item.leader_name %>팀  <br>
+                   <% else %>
+                     <%= item.leader_name.first(13)+"..." %>팀  <br>
+                   <% end %>
+              <!-- 여기까지 -->
+                     <div style="width:100%;height:20px">
                      <% item.tags.each do |tag| %>
                      
                      <span style="background-color:#EFEFEF; margin-right: 5px;font-size:100%">
-                      #<%= tag.tagging.first(5)%>
+                      <%= tag.tagging.first(5)%>
                     </span>
                     
                       <%end%>
@@ -151,9 +165,13 @@
     </div>
   </div>
   
+  
+  
+  
+  
       <div class="row">
         <% @tagged_articles.shuffle.each do |item| %>
-          <div class="col-md-3 col-md-offset-0 col-sm-6 col-xs-10 col-xs-offset-1">
+          <div class="col-md-3 col-md-offset-0 col-sm-12 col-xs-12 col-xs-offset-0">
             <a href="/article_board/detailpage/<%=item.id%>">
               <div class="thumbnail">
                 <%if item.my_image.url==nil %>
@@ -162,13 +180,25 @@
                   <img style="border-radius: 20px; " src="<%=item.my_image.url(:thumb)%>"/>    
                 <% end %>
                 <div class="caption" style="padding-bottom: 0px;">
-                  <h4 style="font-weight: 800; color:#EB8E34;letter-spacing: 0px;"><%= item.title %></h4>
+             <!--8/13 3:49 변경 -->
+                  <% unless item.title.length > 14 %>
+                    <h4 style="font-weight: 800; color:#EB8E34;letter-spacing: 0px;"><%= item.title %></h4>
+                  <% else %>
+                    <h4 style="font-weight: 800; color:#EB8E34;letter-spacing: 0px;"><%= item.title.first(13)+"..." %></h4>
+                  <% end %>
                   <div style="width:100%;height:20px">
-                  <h5 style="word-spacing: -2px; font-weight: 700; letter-spacing: 0px; color: #717171;" ><%= item.summary.first(20) %></h5>
+                  <h5 style="word-spacing: -2px; font-weight: 700; letter-spacing: 0px; color: #717171;font-size:100%" ><%= item.summary.first(20) %></h5>
                   </div>
                   <div style="margin-top: 1px solid white;"></div>
                   <div style="font-weight: 700; color: #8E8E8E; margin-bottom: 1px solid black;">   <!--팀장명 오른쪽 정렬 처리-->
-                   <hr style="margin: 10px 0px 10px 0px;"><%= item.leader_name %>팀  <br>
+                  
+                   <hr style="margin: 10px 0px 10px 0px;">
+                   <% unless item.leader_name.length > 14%>
+                     <%= item.leader_name %>팀  <br>
+                   <% else %>
+                     <%= item.leader_name.first(13)+"..." %>팀  <br>
+                   <% end %>
+              <!-- 여기까지 -->
                      <div style="width:100%;height:20px">
                        <% item.tags.each do |tag| %>
                        <span style="background-color:#EFEFEF; margin-right: 5px;font-size:100%">
@@ -223,23 +253,48 @@
         </div>
         <div class="row">
           <% @selected_articles.each do |item| %>
-             <div class="col-md-3 col-md-offset-0 col-sm-6 col-xs-10 col-xs-offset-1">
+          
+            
+             
+             
+             
+             <div class="col-md-3 col-md-offset-0 col-sm-12 col-xs-12 col-xs-offset-0">
+                    
+      
+                <!--8/18 여기까지-->
+          
               <a href="/article_board/detailpage/<%=item.id%>">
+                 
+                <!-- 변경-->
                 <div class="thumbnail">
+           
                   <%if item.my_image.url==nil %>
                     <img style="border-radius: 20px; width: 100%;" src="/image/sample.png" />
                   <% else %> 
                     <img style="border-radius: 20px; " src="<%=item.my_image.url(:thumb)%>"/>    
                   <% end %>
                   <div class="caption" style="padding-bottom: 0px;">
-                    <h4 style="font-weight: 800; color:#EB8E34;letter-spacing: 0px;"><%= item.title %></h4>
+                  
+              <!--8/13 3:49 변경 -->
+                    <% unless item.title.length > 14 %>
+                      <h4 style="font-weight: 800; color:#EB8E34;letter-spacing: 0px;"><%= item.title %></h4>
+                    <% else %>
+                      <h4 style="font-weight: 800; color:#EB8E34;letter-spacing: 0px;"><%= item.title.first(13)+"..." %></h4>
+                    <% end %>
                     <div style="width:100%;height:20px">
-                    <h5 style="word-spacing: -2px; font-weight: 700; letter-spacing: 0px; color: #717171;" ><%= item.summary.first(20) %></h5>
+                    <h5 style="word-spacing: -2px; font-weight: 700; letter-spacing: 0px; color: #717171;font-size:100%" ><%= item.summary.first(20) %></h5>
                     </div>
                     <div style="margin-top: 1px solid white;"></div>
                     <div style="font-weight: 700; color: #8E8E8E; margin-bottom: 1px solid black;">   <!--팀장명 오른쪽 정렬 처리-->
-                     <hr style="margin: 10px 0px 10px 0px;"><%= item.leader_name %>팀  <br>
-                       <div style="width:100%;height:20px">
+                    
+                     <hr style="margin: 10px 0px 10px 0px;">
+                     <% unless item.leader_name.length > 14%>
+                       <%= item.leader_name %>팀  <br>
+                     <% else %>
+                       <%= item.leader_name.first(13)+"..." %>팀  <br>
+                     <% end %>
+              <!-- 여기까지 -->
+                       <div  style="width:100%;height:20px">
                          <% item.tags.each do |tag| %>
                          <span style="background-color:#EFEFEF; margin-right: 5px;font-size:100%">
                           #<%= tag.tagging.first(5)%>
@@ -257,17 +312,105 @@
                   </div>
                 </div>
               </a>
+              
+           <hr style="margin: 13px 0px 13px 0px; border-color: #bfbfbf;"> 
+
+                <div class="row" style="padding: 10px 0px 10px 0px;">
+                   <div class="col-md-4 col-md-offset-3 col-xs-12 col-sm-12" style="padding:0px; text-align:center;">
+                     <h5 style="word-spacing: -2px; font-weight: 700; letter-spacing: 0px; padding-top: 3px; color: #717171;font-size:100%" >투표하기</h5>
+                  </div>
+                   <div class="col-md-5 col-xs-12 col-sm-12" style=" padding:0px;text-align:center;">
+                     <input style="text-align: center; font-weight: 900; font-size: 20px; color: orange; margin: 0px; padding:0px;" class="vote_box" type="checkbox" id="<%=item.id%>" value="<%=item.id%>">
+                   </div>
+                </div>
+           <hr style="width: 100%; margin: 5px 0px 13px 0px; border-color: #bfbfbf;">             
             </div>
         <% end %>
         </div>
+        
+        <!--8/18 밤 12:54 변경-->
+        <% if user_signed_in? && current_user.final_entries.empty? %>
+          <form  action = "/vote_board/entry" method ="POST" onsubmit="return submitCheck();">
+            <!--이것도 8/18 추가-->
+            <div class="row">
+              <div class="col-xs-12" style="text-align: center; margin-top: 50px;">
+                <input class="form-style-12" id= "votes" type= "hidden" name= "votes" value="">
+                <input class="form-style-12" type= "submit" value="최종제출">
+              </div>
+            </div>
+          </form>
+        <% elsif user_signed_in? %>
+          <div class="row">
+            <div class="col-xs-12" style="text-align: center; margin-top: 50px;">
+              <a href="/vote_board/already_vote" class="form-style-12">내가 투표한 후보 보기</a>
+            </div>
+          </div>
+        <% end %>
+        <!--여기까지 8/18 추가-->
+        
+             
       </div>
+   
+          
     <% end %>
+       
   </div>
+  
+  
+      
 </div>
 </div>
+
+          
+          
 <!-- 좋아요 리셋 버튼 꾸밀필요 음슴-->
 <% if user_signed_in? && (current_user.email == "cokr3430@gmail.com" || current_user.email == "ohs2033@korea.ac.kr") %>
-    <a href="/article_board/hall_of_fame_action">리셋해버렷!</a>
+<!-- 8/14 12:11 -->
+    <a href="/article_board/hall_of_fame_check">리셋해버렷!</a>
+<!-- 여기까지 -->
 <% end %>
 
 <%= render :partial => "/article_board/bottom" %>
+
+
+
+
+
+
+<!-- 후보 등록창 8/18-->
+<script>
+$(document).ready(function(){
+    $(".vote_box").click(function(){
+        var ary = [];
+        var checkboxes = $(".vote_box");
+        checkboxes.each(function() {
+            var checkbox = $(this);
+            if (checkbox.context.checked)
+                ary.push(checkbox.context.value);
+        });
+        str = ary.join()
+        document.getElementById("votes").value = str
+    });
+});
+</script>
+<!--8/18-->
+
+<!--8/19-->
+<script>
+function submitCheck() {
+
+  vote_str = document.getElementById("votes").value
+  vote_ary = vote_str.split(",")
+  console.log(vote_ary.length)
+  
+  inValid = (vote_ary.length < 3 || vote_ary.length > 6)
+
+  if(inValid) {
+    alert('투표 후보는 3개에서 6개까지 선택 가능합니다!');
+    return false;
+  }
+  else {
+    return confirm('정말로 투표 하시겠습니까? 투표는 한번만 가능합니다');
+  }
+}
+</script>

@@ -51,7 +51,7 @@ Article.find(article_seed1.id).tags << tag
 tag = Tag.find_by_tagging("팀빌딩")||Tag.create(:tagging => "팀빌딩", :created_at => article_seed1.id)
 Article.find(article_seed1.id).tags << tag
 
-=begin
+
 #article seed set 2
 article_seed2 = Article.new
 
@@ -183,5 +183,3 @@ Article.find(article_seed5a.id).tags << tag
 tag = Tag.find_by_tagging("시드5")||Tag.create(:tagging => "시드5", :created_at => article_seed5a.id)
 Article.find(article_seed5a.id).tags << tag
 
-
-=end

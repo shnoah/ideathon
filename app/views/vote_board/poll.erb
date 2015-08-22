@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-md-6">
+      <% if current_user.email =="ohs2033@korea.ac.kr"%>
+        <h1>현재 아이디어 득표 순위</h1>
+       
+        <% rank = 1 %>
+        <% @article_hash.each do |item| %>
+            <span style="color: red;"><%= rank.to_s + "등"%></span><br>
+            <span style="color: red;">db 정보</span> : <%= item[0].inspect %><br>
+            <span style="color: red;">득표수</span> : <%= item[1] %><br><hr>
+            <% rank += 1%>
+        <% end %>
+    </div>
+    <div class="col-md-6">
+        <h1>현재 토토 순위</h1>
+        <p><span style="color: red;"><%= @rank_limit %></span>등까지 적중되었는지 확인</p>
+        <% rank = 1 %>
+        <% @user_hash.each do |item| %>
+            <span style="color: red;"><%= rank.to_s + "등"%></span><br>
+            <span style="color: red;">정보</span> : <%= item[0].name %> | <%= item[0].university %><br>
+            <span style="color: red;">적중횟수</span> : <%= item[1] %><br><hr>
+            <% rank += 1%>
+        <% end %>
+    </div>
+    
+    <%else%>
+    
+    <%end%>
+</div>
+

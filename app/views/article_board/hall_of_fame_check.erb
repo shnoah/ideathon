@@ -1,0 +1,8 @@
+<% @hash.each do |title, like|%>
+    <%= title %> | <span style="color: blue"><%= like %></span><br>
+<% end %>
+
+<% if user_signed_in? && (current_user.email == "cokr3430@gmail.com" || current_user.email == "ohs2033@korea.ac.kr") %>
+    <a href="/article_board/hall_of_fame_action">리셋해버렷!</a>
+<% end %>
+<a href="/article_board/main_board">돌아가기</a>

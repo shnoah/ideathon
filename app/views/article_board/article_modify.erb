@@ -17,14 +17,17 @@
                   <label><span style="margin-bottom: 10px; font-weight: 900;">서비스명(필수)</span> <input type="text" name="title" value=<%=@this_post.title%> required></label>
                   <label><span style="margin-bottom: 10px; font-weight: 900;">한줄설명(필수)</span> <input type="text" maxlength="20" name="summary" value=<%=@this_post.summary%> required></label>
                   <label><span style="margin-bottom: 10px; font-weight: 900;">상세설명(필수)</span> <textarea rows="3" style="color: #66696B;" name="contents"  required><%=@this_post.contents %></textarea></label>
+<!-- 15/08/12 추가 -->
+                  <label><span style="margin-bottom: 10px; font-weight: 900;">태그(필수)</span> <input type="text" name="tag" value="#<%= @tags.join("#") %>" required></input></label>
+
                   <label><span style="margin-bottom: 10px; font-weight: 900;">데모링크</span> <input type="text" style="color: #66696B;" name="demo_link" value=<%=@this_post.demo_link%>></label>      
                   <label><span style="margin-bottom: 10px; font-weight: 900;">이미지첨부</span> <div id="test" style="padding: 5px 10px 5px 10px;" > <input type=file name="image_file"> </div>
               </div>
           
               <div class="section" style="padding-left: 40px"> 팀/자기소개</div>
               <div class="inner-wrap">
-                  <label><span style="margin-bottom: 10px; font-weight: 900;">팀대표자</span><input type="text" name="leader_name" value=<%=@this_post.leader_name%> /></label>
-                  <label><span style="margin-bottom: 10px; font-weight: 900;">팀구성원</span> <input type="text" name="member_name"value=<%= @members.join(",") %> /></label>
+                  <label><span style="margin-bottom: 10px; font-weight: 900;">팀대표자</span><input type="text" name="leader_name" value=<%=@this_post.leader_name%> ></label>
+                  <label><span style="margin-bottom: 10px; font-weight: 900;">팀구성원</span> <input type="text" name="member_name"value=<%= @members.join(",") %> ></label>
               </div>
           
               <div class="section" style="padding-left: 40px"> 연락처</div>

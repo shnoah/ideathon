@@ -1,0 +1,46 @@
+<%= render :partial => "/article_board/navbar" %>
+
+     <div class="col-md-8 col-md-offset-2 col-sm-12 co-xs-12">
+     <div class="form-style-10" style="padding: 45px 0px 45px 0px;">
+
+              <div class="section" style="padding-left: 40px"> 이미 투표하셨습니다.</div>
+              <div class="inner-wrap" style="text-align: center;">
+              <%@final.each do |k|%>
+
+<% number=k.final_id%>
+<% aa= Article.find(number)%>
+<%=aa.title%><br>
+
+<%end%>
+
+
+
+<%if current_user.email=="ohs2033@korea.ac.kr"%>
+<h1>다른사람이 투표한 목록은,</h1><br>
+
+
+<%@finalall.each do |x|%>
+
+<%=User.find(x.user_id).name%>님이 <%=Article.find(x.final_id).title%>를 투표하셨습니다.<br>
+
+<%end%>
+
+<%end%>
+
+
+            </div>
+             <div style="text-align: center;">
+             
+                   <a class="button-section"  href="/article_board/main_board">
+                    <input type="button" value="돌아가기">                 
+                   </a>
+              </div>
+          </form>
+        </div>
+        </div>
+          
+          
+              </div>
+<%= render :partial => "/article_board/bottom" %>
+
+

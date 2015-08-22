@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150811110939) do
+ActiveRecord::Schema.define(version: 20150817171557) do
 
   create_table "article_images", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -48,6 +48,13 @@ ActiveRecord::Schema.define(version: 20150811110939) do
     t.integer  "like"
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
+  end
+
+  create_table "final_entries", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "final_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "free_replies", force: :cascade do |t|
